@@ -21,8 +21,8 @@ public class ArticleService {
 		articleRepository.writeArticle(title, body);
 	}
 	
-	public int getLastInserId() {
-		return articleRepository.getLastInserId();
+	public int getLastInsertId() {
+		return articleRepository.getLastInsertId();
 	}
 	
 	public Article getArticleById(int id) {

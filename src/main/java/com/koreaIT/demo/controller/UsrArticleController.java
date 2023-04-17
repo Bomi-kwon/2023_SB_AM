@@ -26,7 +26,7 @@ public class UsrArticleController {
 		
 		articleService.writeArticle(title, body);
 		
-		int id = articleService.getLastInserId();
+		int id = articleService.getLastInsertId();
 		
 		Article article = articleService.getArticleById(id);
 		
