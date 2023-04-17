@@ -1,0 +1,72 @@
+# DB 삭제/생성/사용
+DROP DATABASE IF EXISTS SB_AM;
+CREATE DATABASE SB_AM;
+USE SB_AM;
+
+
+# article 테이블 생성
+CREATE TABLE article(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	title VARCHAR(100) NOT NULL,
+	`body` TEXT NOT NULL
+);
+
+# member 테이블 생성
+CREATE TABLE `member`(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	loginID VARCHAR(50) NOT NULL,
+	loginPW VARCHAR(50) NOT NULL,
+	`name` VARCHAR(50) NOT NULL
+);
+
+# 테이블 구조 확인
+DESC article;
+DESC `member`;
+
+# article 테스트 데이터
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목1',
+`body` = '내용1';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목2',
+`body` = '내용2';
+INSERT INTO article
+
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목3',
+`body` = '내용3';
+
+# member 테스트 데이터
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginID = 'test1',
+loginPW = 'test1',
+`name` = 'test1';
+
+# 데이터 갯수 곱하기 2배씩
+INSERT INTO article(regDate, updateDate, title, `body`)
+SELECT NOW(), NOW(), CONCAT('제목_', RAND()), CONCAT('내용_', RAND())
+FROM article;
+
+# 데이터 확인
+SELECT * FROM article
+ORDER BY id DESC;
+
+SELECT * FROM `member`
+ORDER BY id DESC;
+
+DELETE FROM `member`
+WHERE loginID = "rnjsqhal51"
+LIMIT 2;
+
