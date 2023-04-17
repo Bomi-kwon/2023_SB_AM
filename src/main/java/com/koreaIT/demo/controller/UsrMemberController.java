@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.MemberService;
-import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.Member;
 
 @Controller

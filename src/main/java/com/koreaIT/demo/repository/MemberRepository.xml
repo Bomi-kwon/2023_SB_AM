@@ -5,12 +5,22 @@
 	
 	<insert id="addMember">
 		INSERT INTO `member`
-			SET loginID = #{loginID},
+			SET regDate = NOW(),
+				updateDate = NOW(),
+				loginID = #{loginID},
 				loginPW = #{loginPW},
-				name = #{name},
+				`name` = #{name},
 				nickname = #{nickname},
 				cellphoneNum = #{cellphoneNum},
-				email = #{email},
+				email = #{email}
 	</insert>
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+	
+	<select id="getMemberById" resultType="Member">
+		SELECT * FROM `member` WHERE id = #{id}
+	</select>
 	
 </mapper>
