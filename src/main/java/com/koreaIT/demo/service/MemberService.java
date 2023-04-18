@@ -23,9 +23,29 @@ public class MemberService {
 			return -1;
 		}
 		
+		Member nicknameDupMember = getMemberByNickname(nickname);
+		
+		if (nicknameDupMember != null) {
+			return -2;
+		}
+		
+		Member octopusMember = getoctopusMember(name, email);
+		
+		if (octopusMember != null) {
+			return -3;
+		}
+		
 		memberRepository.doJoin(loginID, loginPW, name, nickname, cellphoneNum, email);
 		
 		return memberRepository.getLastInsertId();
+	}
+
+	private Member getoctopusMember(String name, String email) {
+		return memberRepository.getoctopusMember(name, email);
+	}
+
+	private Member getMemberByNickname(String nickname) {
+		return memberRepository.getMemberByNickname(nickname);
 	}
 
 	private Member getMemberByLoginID(String loginID) {

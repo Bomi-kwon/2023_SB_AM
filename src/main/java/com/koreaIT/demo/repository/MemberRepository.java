@@ -7,8 +7,7 @@ import com.koreaIT.demo.vo.Member;
 @Mapper
 public interface MemberRepository {
 
-	public void doJoin(String loginID, String loginPW, String name, String nickname, String cellphoneNum,
-			String email);
+	public void doJoin(String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email);
 
 	public int getLastInsertId();
 
@@ -16,4 +15,7 @@ public interface MemberRepository {
 
 	public Member getMemberByLoginID(String loginID);
 
+	public Member getMemberByNickname(String nickname);
+
+	public Member getoctopusMember(String name, String email);
 }
