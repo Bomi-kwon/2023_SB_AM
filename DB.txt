@@ -13,17 +13,23 @@ CREATE TABLE article(
 	`body` TEXT NOT NULL
 );
 
+# member 테이블 삭제
+DROP TABLE `member`;
+
 # member 테이블 생성
 CREATE TABLE `member`(
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
-	loginID VARCHAR(50) NOT NULL,
-	loginPW VARCHAR(50) NOT NULL,
-	`name` VARCHAR(50) NOT NULL,
-	nickname VARCHAR(50) NOT NULL,
-	cellphoneNum VARCHAR(100) NOT NULL,
-	email VARCHAR(100) NOT NULL
+	loginID VARCHAR(20) NOT NULL UNIQUE,
+	loginPW VARCHAR(100) NOT NULL,
+	`authLevel` SMALLINT UNSIGNED NOT NULL DEFAULT 3 COMMENT '권한 레벨 (일반 = 3, 관리자 = 7)',
+	`name` VARCHAR(20) NOT NULL,
+	nickname VARCHAR(20) NOT NULL,
+	cellphoneNum VARCHAR(20) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	delStatus TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴여부 (탈퇴 전 = 0, 탈퇴 후 = 1)',
+	delData DATETIME COMMENT '탈퇴 날짜'
 );
 
 # 테이블 구조 확인
@@ -53,12 +59,33 @@ title = '제목3',
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
+loginID = 'admin',
+loginPW = 'admin',
+`authLevel` = 7,
+`name` = '관리자',
+nickname = '관리자',
+cellphoneNum = '010-0000-0000',
+email = 'imtheking@naver.com';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
 loginID = 'test1',
 loginPW = 'test1',
 `name` = '도라에몽',
-nickname = '에몽',
-cellphoneNum = '010-0000-0000',
+nickname = '도라에몽',
+cellphoneNum = '010-1111-1111',
 email = 'doraemong@naver.com';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginID = 'test2',
+loginPW = 'test2',
+`name` = '퉁퉁이',
+nickname = '퉁퉁이',
+cellphoneNum = '010-2222-2222',
+email = 'toong@naver.com';
 
 # 데이터 갯수 곱하기 2배씩
 INSERT INTO article(regDate, updateDate, title, `body`)
