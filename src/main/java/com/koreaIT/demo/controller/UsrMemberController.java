@@ -49,15 +49,15 @@ public class UsrMemberController {
 		int id = memberService.doJoin(loginID, loginPW, name, nickname, cellphoneNum, email);
 		
 		if(id == -1) {
-			return "이미 사용중인 아이디입니다.";
+			return Util.f("%s는 이미 사용중인 아이디입니다.", loginID);
 		}
 		
 		if(id == -2) {
-			return "이미 사용중인 닉네임입니다.";
+			return Util.f("%s는 이미 사용중인 닉네임입니다.", nickname);
 		}
 		
 		if(id == -3) {
-			return "회원가입은 한 사람당 한번만 가능합니다.";
+			return Util.f("이미 사용중인 이름(%s)과 이메일(%s)입니다. 회원가입은 한 사람당 한 번만 가능합니다.", name, email);
 		}
 		
 		return memberService.getMemberById(id);

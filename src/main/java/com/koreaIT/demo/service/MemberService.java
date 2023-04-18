@@ -23,15 +23,15 @@ public class MemberService {
 			return -1;
 		}
 		
-		Member nicknameDupMember = getMemberByNickname(nickname);
+		existsMember = getMemberByNickname(nickname);
 		
-		if (nicknameDupMember != null) {
+		if (existsMember != null) {
 			return -2;
 		}
 		
-		Member octopusMember = getoctopusMember(name, email);
+		existsMember = getoctopusMember(name, email);
 		
-		if (octopusMember != null) {
+		if (existsMember != null) {
 			return -3;
 		}
 		
