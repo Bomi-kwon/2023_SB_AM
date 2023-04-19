@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.MemberService;
 import com.koreaIT.demo.util.Util;
+import com.koreaIT.demo.vo.Member;
+import com.koreaIT.demo.vo.ResultData;
 
 @Controller
 public class UsrMemberController {
@@ -23,44 +25,39 @@ public class UsrMemberController {
 	public Object doJoin(String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
 		
 		if(Util.empty(loginID)) {
-			return "아이디를 입력하세요.";
+			return ResultData.from("F-1", "아이디를 입력해주세요.");
 		}
 		
 		if(Util.empty(loginPW)) {
-			return "비밀번호를 입력하세요.";
+			return ResultData.from("F-2", "비밀번호를 입력해주세요.");
 		}
 		
 		if(Util.empty(name)) {
-			return "이름을 입력하세요.";
+			return ResultData.from("F-3", "이름을 입력해주세요.");
 		}
 		
 		if(Util.empty(nickname)) {
-			return "닉네임을 입력하세요.";
+			return ResultData.from("F-4", "닉네임을 입력해주세요.");
 		}
 		
 		if(Util.empty(cellphoneNum)) {
-			return "전화번호를 입력하세요.";
+			return ResultData.from("F-5", "전화번호를 입력해주세요.");
 		}
 		
 		if(Util.empty(email)) {
-			return "이메일을 입력하세요.";
+			return ResultData.from("F-6", "이메일을 입력해주세요.");
 		}
 		
-		int id = memberService.doJoin(loginID, loginPW, name, nickname, cellphoneNum, email);
+		ResultData doJoinRd = memberService.doJoin(loginID, loginPW, name, nickname, cellphoneNum, email);
 		
-		if(id == -1) {
-			return Util.f("%s는 이미 사용중인 아이디입니다.", loginID);
+		if(doJoinRd.isFail() == true) {
+			return doJoinRd;
 		}
 		
-		if(id == -2) {
-			return Util.f("%s는 이미 사용중인 닉네임입니다.", nickname);
-		}
+		int id = (int) doJoinRd.getData1();
+		Member member = memberService.getMemberById(id);
 		
-		if(id == -3) {
-			return Util.f("이미 사용중인 이름(%s)과 이메일(%s)입니다. 회원가입은 한 사람당 한 번만 가능합니다.", name, email);
-		}
-		
-		return memberService.getMemberById(id);
+		return ResultData.from(doJoinRd.getResultCode(), doJoinRd.getMsg(), member);
 	}
 	
 	

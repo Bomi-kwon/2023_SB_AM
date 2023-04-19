@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.koreaIT.demo.repository.MemberRepository;
+import com.koreaIT.demo.util.Util;
 import com.koreaIT.demo.vo.Member;
+import com.koreaIT.demo.vo.ResultData;
 
 @Service
 public class MemberService {
@@ -15,29 +17,31 @@ public class MemberService {
 		this.memberRepository = memberRepository;
 	}
 
-	public int doJoin(String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
+	public ResultData doJoin(String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
 		
 		Member existsMember = getMemberByLoginID(loginID);
 		
 		if (existsMember != null) {
-			return -1;
+			return ResultData.from("F-7", Util.f("%s는 이미 사용중인 아이디입니다.", loginID));
 		}
 		
 		existsMember = getMemberByNickname(nickname);
 		
 		if (existsMember != null) {
-			return -2;
+			return ResultData.from("F-8", Util.f("%s는 이미 사용중인 닉네임입니다.", nickname));
 		}
 		
 		existsMember = getoctopusMember(name, email);
 		
 		if (existsMember != null) {
-			return -3;
+			return ResultData.from("F-9", Util.f("이미 사용중인 이름(%s)과 이메일(%s)입니다.", name, email));
 		}
 		
 		memberRepository.doJoin(loginID, loginPW, name, nickname, cellphoneNum, email);
 		
-		return memberRepository.getLastInsertId();
+		int id = memberRepository.getLastInsertId();
+		
+		return ResultData.from("S-1", Util.f("%s님, 회원가입을 축하합니다.", nickname), id);
 	}
 
 	private Member getoctopusMember(String name, String email) {

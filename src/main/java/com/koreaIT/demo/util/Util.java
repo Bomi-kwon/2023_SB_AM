@@ -12,7 +12,7 @@ public class Util {
 		return str.trim().length() == 0;
 	}
 
-	public static Object f(String format, Object... args) {
+	public static String f(String format, Object... args) {
 		
 		return String.format(format, args);
 	}
