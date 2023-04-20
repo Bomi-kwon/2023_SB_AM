@@ -24,7 +24,7 @@ public class UsrArticleController {
 	//액션메서드
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public ResultData doAdd(String title, String body) {
+	public ResultData<Article> doAdd(String title, String body) {
 		
 		if(Util.empty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요.");
@@ -45,13 +45,13 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
-	public List<Article> getArticles() {
-		return articleService.getArticles();
+	public ResultData<List<Article>> getArticles() {
+		return ResultData.from("S-1", "게시물 리스트", articleService.getArticles());
 	}
 	
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
-	public ResultData getArticle(int id) {
+	public ResultData<Article> getArticle(int id) {
 		Article article = articleService.getArticleById(id);
 		
 		if(article == null) {
@@ -77,16 +77,16 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(int id, String title, String body) {
+	public ResultData doModify(int id, String title, String body) {
 		Article article = articleService.getArticleById(id);
 		
 		if(article == null) {
-			return id + "번 게시물은 존재하지 않습니다.";
+			return ResultData.from("F-1", Util.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 		
 		articleService.modifyArticle(id, title, body);
 		
-		return id + "번 게시물을 수정했습니다.";
+		return ResultData.from("S-1", Util.f("%d번 게시물을 수정했습니다.", id));
 	}
 
 	

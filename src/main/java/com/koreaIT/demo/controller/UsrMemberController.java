@@ -22,7 +22,7 @@ public class UsrMemberController {
 	//액션메서드
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public Object doJoin(String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
+	public ResultData<Member> doJoin(String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
 		
 		if(Util.empty(loginID)) {
 			return ResultData.from("F-1", "아이디를 입력해주세요.");
@@ -48,10 +48,10 @@ public class UsrMemberController {
 			return ResultData.from("F-6", "이메일을 입력해주세요.");
 		}
 		
-		ResultData doJoinRd = memberService.doJoin(loginID, loginPW, name, nickname, cellphoneNum, email);
+		ResultData<Integer> doJoinRd = memberService.doJoin(loginID, loginPW, name, nickname, cellphoneNum, email);
 		
 		if(doJoinRd.isFail() == true) {
-			return doJoinRd;
+			return ResultData.from(doJoinRd.getResultCode(), doJoinRd.getMsg());
 		}
 		
 		int id = (int) doJoinRd.getData1();
