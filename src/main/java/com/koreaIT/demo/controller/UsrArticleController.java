@@ -2,6 +2,8 @@ package com.koreaIT.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,7 @@ public class UsrArticleController {
 	//액션메서드
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public ResultData<Article> doAdd(String title, String body) {
+	public ResultData<Article> doAdd(HttpSession httpSession, String title, String body) {
 		
 		if(Util.empty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요.");
@@ -63,16 +65,16 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(int id) {
+	public ResultData doDelete(int id) {
 		Article article = articleService.getArticleById(id);
 		
 		if(article == null) {
-			return id + "번 게시물은 존재하지 않습니다.";
+			return ResultData.from("F-1", Util.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 		
 		articleService.deleteArticle(id);
 		
-		return id + "번 게시물을 삭제했습니다.";
+		return ResultData.from("S-1", Util.f("%d번 게시물을 삭제했습니다.", id));
 	}
 
 	@RequestMapping("/usr/article/doModify")
@@ -85,6 +87,7 @@ public class UsrArticleController {
 		}
 		
 		articleService.modifyArticle(id, title, body);
+		
 		
 		return ResultData.from("S-1", Util.f("%d번 게시물을 수정했습니다.", id));
 	}

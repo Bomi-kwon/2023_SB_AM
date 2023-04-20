@@ -1,5 +1,7 @@
 package com.koreaIT.demo.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,12 +54,13 @@ public class MemberService {
 		return memberRepository.getMemberByNickname(nickname);
 	}
 
-	private Member getMemberByLoginID(String loginID) {
+	public Member getMemberByLoginID(String loginID) {
 		return memberRepository.getMemberByLoginID(loginID);
 	}
 
 	public Member getMemberById(int id) {
 		return memberRepository.getMemberById(id);
 	}
+
 	
 }
