@@ -27,7 +27,7 @@ public class UsrMemberController {
 	public ResultData<Member> doJoin(HttpSession httpSession, String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
 		
 		if (httpSession.getAttribute("loginedMemberId") != null) {
-			return ResultData.from("F-1", "로그아웃 후 이용해주세요.");
+			return ResultData.from("F-0", "로그아웃 후 이용해주세요.");
 		}
 		
 		if(Util.empty(loginID)) {
