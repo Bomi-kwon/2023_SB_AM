@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,17 @@
 </head>
 <body>
 	<h1>메인페이지</h1>
-
+	
+	<div>
+		<a href="/">로고</a>
+		
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/usr/article/list">LIST</a></li>
+		</ul>
+	</div>
+	
+	<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque sint error at placeat corporis dignissimos ipsa obcaecati alias illo corrupti maiores possimus culpa dolorum consectetur quis necessitatibus ab quibusdam deserunt!</div>
+	
 </body>
 </html>
