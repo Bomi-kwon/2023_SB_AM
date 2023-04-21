@@ -48,13 +48,13 @@ public class UsrArticleController {
 		
 		Article article = articleService.getArticleById(id);
 		
-		return ResultData.from("S-1", Util.f("%d번 게시물이 생성되었습니다.", id), article);
+		return ResultData.from("S-1", Util.f("%d번 게시물이 생성되었습니다.", id), "article" ,article);
 	}
 	
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
 	public ResultData<List<Article>> getArticles() {
-		return ResultData.from("S-1", "게시물 리스트", articleService.getArticles());
+		return ResultData.from("S-1", "게시물 리스트", "article list" ,articleService.getArticles());
 	}
 	
 	@RequestMapping("/usr/article/getArticle")
@@ -66,7 +66,7 @@ public class UsrArticleController {
 			return ResultData.from("F-1", Util.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 		
-		return ResultData.from("S-1", Util.f("%d번 게시물입니다.", id), article);
+		return ResultData.from("S-1", Util.f("%d번 게시물입니다.", id), "article" ,article);
 	}
 	
 	@RequestMapping("/usr/article/doDelete")

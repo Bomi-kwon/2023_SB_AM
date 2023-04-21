@@ -41,7 +41,7 @@ public class ArticleService {
 		
 		articleRepository.modifyArticle(id, title, body);
 		
-		return ResultData.from("S-1", Util.f("%d번 게시물을 수정했습니다.", id), getArticleById(id));
+		return ResultData.from("S-1", Util.f("%d번 게시물을 수정했습니다.", id), "id" ,getArticleById(id));
 	}
 
 	public List<Article> getArticles() {

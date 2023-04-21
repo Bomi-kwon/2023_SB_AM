@@ -41,7 +41,7 @@ public class MemberService {
 		
 		int id = memberRepository.getLastInsertId();
 		
-		return ResultData.from("S-1", Util.f("%s님, 회원가입을 축하합니다.", nickname), id);
+		return ResultData.from("S-1", Util.f("%s님, 회원가입을 축하합니다.", nickname), "id" ,id);
 	}
 
 	private Member getoctopusMember(String name, String email) {

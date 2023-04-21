@@ -63,7 +63,7 @@ public class UsrMemberController {
 		int id = (int) doJoinRd.getData1();
 		Member member = memberService.getMemberById(id);
 		
-		return ResultData.from(doJoinRd.getResultCode(), doJoinRd.getMsg(), member);
+		return ResultData.from(doJoinRd.getResultCode(), doJoinRd.getMsg(), "member" ,member);
 	}
 	
 	@RequestMapping("/usr/member/doLogin")
