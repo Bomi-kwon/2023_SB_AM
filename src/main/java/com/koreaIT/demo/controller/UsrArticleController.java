@@ -83,7 +83,9 @@ public class UsrArticleController {
 			return ResultData.from("F-1", Util.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 		
-		if (!httpSession.getAttribute("loginedMemberId").equals(article.getMemberId())) {
+		int loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		
+		if (loginedMemberId != article.getMemberId()) {
 			return ResultData.from("F-2", "게시물 삭제 권한이 없습니다.");
 		}
 		
@@ -94,7 +96,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData doModify(HttpSession httpSession, int id, String title, String body) {
+	public ResultData<Article> doModify(HttpSession httpSession, int id, String title, String body) {
 		
 		if (httpSession.getAttribute("loginedMemberId") == null) {
 			return ResultData.from("F-0", "로그인 후 이용해주세요.");
@@ -106,17 +108,15 @@ public class UsrArticleController {
 			return ResultData.from("F-1", Util.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 		
-		if (!httpSession.getAttribute("loginedMemberId").equals(article.getMemberId())) {
-			return ResultData.from("F-2", "게시물 수정 권한이 없습니다.");
+		int loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		
+		ResultData doModifyRd = articleService.doModifyRd(loginedMemberId, article.getMemberId());
+		
+		if(doModifyRd.isFail()) {
+			return ResultData.from(doModifyRd.getResultCode(), doModifyRd.getMsg());
 		}
 		
-		articleService.modifyArticle(id, title, body);
-		
-		
-		return ResultData.from("S-1", Util.f("%d번 게시물을 수정했습니다.", id));
+		return articleService.modifyArticle(id, title, body);
 	}
 
-	
-	
-	
 }
