@@ -63,10 +63,17 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(int id, Model model) {
-		Article article = articleService.getForPrintArticle(id);
+	public String showDetail(int id, Model model, HttpSession httpSession) {
+		int loginedMemberId = 0;
+		
+		if(httpSession.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
+		
+		Article article = articleService.getForPrintArticle(loginedMemberId, id);
 		
 		model.addAttribute("article", article);
+		model.addAttribute("loginedMemberId", loginedMemberId);
 		
 		return "usr/article/detail";
 	}
@@ -96,29 +103,29 @@ public class UsrArticleController {
 		return ResultData.from("S-1", Util.f("%d번 게시물을 삭제했습니다.", id));
 	}
 
-	@RequestMapping("/usr/article/doModify")
+	@RequestMapping("/usr/article/modify")
 	@ResponseBody
-	public ResultData<Article> doModify(HttpSession httpSession, int id, String title, String body) {
-		
-		if (httpSession.getAttribute("loginedMemberId") == null) {
-			return ResultData.from("F-0", "로그인 후 이용해주세요.");
-		}
+	public String doModify(HttpSession httpSession, int id, String title, String body, Model model) {
 		
 		Article article = articleService.getArticleById(id);
 		
-		if(article == null) {
-			return ResultData.from("F-1", Util.f("%d번 게시물은 존재하지 않습니다.", id));
-		}
+		model.addAttribute("article", article);
 		
 		int loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 		
 		ResultData doModifyRd = articleService.doModifyRd(loginedMemberId, article.getMemberId());
 		
 		if(doModifyRd.isFail()) {
-			return ResultData.from(doModifyRd.getResultCode(), doModifyRd.getMsg());
+			return doModifyRd.getMsg();
 		}
 		
-		return articleService.modifyArticle(id, title, body);
+		model.addAttribute("httpSession", httpSession);
+		model.addAttribute("loginedMemberId", loginedMemberId);
+		model.addAttribute("title", title);
+		model.addAttribute("body", body);
+		
+//		return articleService.modifyArticle(id, title, body);
+		return "usr/article/modify";
 	}
 
 }

@@ -57,8 +57,17 @@ public class ArticleService {
 		return ResultData.from("S-1","수정 권한이 있습니다.");
 	}
 
-	public Article getForPrintArticle(int id) {
-		return articleRepository.getForPrintArticle(id);
+	public Article getForPrintArticle(int loginedMemberId, int id) {
+		Article article = articleRepository.getForPrintArticle(id);
+		
+		actorCanChangeData(loginedMemberId, article);
+		
+		return article;
+	}
+
+	private void actorCanChangeData(int loginedMemberId, Article article) {
+
+		
 	}
 	
 }

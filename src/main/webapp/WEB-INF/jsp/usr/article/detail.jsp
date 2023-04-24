@@ -40,9 +40,14 @@
 			</div>
 			
 			<div class="btns">
-				<button type="button" onclick="history.back();">뒤로</button>
-				<a class="btn-text-link" href="modify?id=${article.id }">수정</a>
-				<a class="btn-text-link" href="doDelete?id=${article.id }">삭제</a>
+				<button class="btn-text-link" type="button" onclick="history.back();">뒤로</button>
+				
+				<c:if test="${loginedMemberId } != null">
+					<c:if test="${loginedMemberId } == ${article.memberId }">
+						<a class="btn-text-link" href="modify?id=${article.id }">수정</a>
+						<a class="btn-text-link" href="doDelete?id=${article.id }">삭제</a>
+					</c:if>
+				</c:if>				
 			</div>
 			
 		</div>
