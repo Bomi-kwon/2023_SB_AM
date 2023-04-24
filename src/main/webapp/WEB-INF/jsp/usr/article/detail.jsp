@@ -7,7 +7,7 @@
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
 			<div class="table-box-type-1">
-				<table border="1">
+				<table border="1" class="mx-auto">
 					<colgroup>
 						<col width="100"/>
 						<col width="700"/>
@@ -41,13 +41,10 @@
 			
 			<div class="btns">
 				<button class="btn-text-link" type="button" onclick="history.back();">뒤로</button>
-				
-				<c:if test="${loginedMemberId } != null">
-					<c:if test="${loginedMemberId } == ${article.memberId }">
+					<c:if test="${loginedMemberId == article.memberId }">
 						<a class="btn-text-link" href="modify?id=${article.id }">수정</a>
 						<a class="btn-text-link" href="doDelete?id=${article.id }">삭제</a>
 					</c:if>
-				</c:if>				
 			</div>
 			
 		</div>

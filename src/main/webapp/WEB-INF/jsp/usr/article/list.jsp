@@ -4,15 +4,16 @@
 <c:set var="pageTitle" value="List" />
 
 <%@ include file="../common/head.jsp" %>
-	<section class="mt-8 text-xl">
+
+	<section class="mt-8 mx-auto text-xl">
 		<div class="container mx-auto px-3">
 			<div class="table-box-type-1">
-				<table border="1">
+				<table border="1" class="mx-auto">
 					<colgroup>
 						<col width="100"/>
 						<col width="300"/>
-						<col width="400"/>
-						<col width="100"/>
+						<col width="500"/>
+						<col width="200"/>
 					</colgroup>
 					<thead>
 						<tr>
