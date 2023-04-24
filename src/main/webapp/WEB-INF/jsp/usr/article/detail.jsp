@@ -17,8 +17,16 @@
 						<td>${article.id }</td>
 					</tr>
 					<tr>
+						<th>작성날짜</th>
+						<td>${article.regDate.substring(2,16) }</td>
+					</tr>
+					<tr>
+						<th>수정날짜</th>
+						<td>${article.updateDate.substring(2,16) }</td>
+					</tr>
+					<tr>
 						<th>작성자</th>
-						<td>${article.memberId }</td>
+						<td>${article.writerName }</td>
 					</tr>
 					<tr>
 						<th>제목</th>
@@ -30,6 +38,13 @@
 					</tr>
 				</table>
 			</div>
+			
+			<div class="btns">
+				<button type="button" onclick="history.back();">뒤로</button>
+				<a class="btn-text-link" href="modify?id=${article.id }">수정</a>
+				<a class="btn-text-link" href="doDelete?id=${article.id }">삭제</a>
+			</div>
+			
 		</div>
 	</section>
 	
