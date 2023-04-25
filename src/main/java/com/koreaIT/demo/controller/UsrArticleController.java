@@ -3,7 +3,6 @@ package com.koreaIT.demo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,11 +30,11 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
 		
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("Rq");
 		
-		if ( rq.getLoginedMemberId() == 0) {
-			return ResultData.from("F-A", "로그인 후 이용해주세요.");
-		}
+//		if ( rq.getLoginedMemberId() == 0) {
+//			return ResultData.from("F-A", "로그인 후 이용해주세요.");
+//		}
 		
 		if(Util.empty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요.");
@@ -67,11 +66,9 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(int id, Model model, HttpServletRequest req) {
 		
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("Rq");
 		
-		int loginedMemberId = rq.getLoginedMemberId();
-		
-		Article article = articleService.getForPrintArticle(loginedMemberId, id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
 		model.addAttribute("article", article);
 		
@@ -82,7 +79,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body, Model model) {
 		
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("Rq");
 		
 		if ( rq.getLoginedMemberId() == 0) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요.");
@@ -99,12 +96,11 @@ public class UsrArticleController {
 		return articleService.modifyArticle(id, title, body);
 	}
 	
-	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete(HttpServletRequest req, int id) {
 		
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("Rq");
 		
 		if ( rq.getLoginedMemberId() == 0) {
 			return Util.jsHistoryBack("로그인 후 이용해주세요.");
@@ -122,7 +118,4 @@ public class UsrArticleController {
 		
 		return Util.jsReplace(Util.f("%d번 게시물을 삭제했습니다.", id), "list");
 	}
-
-	
-
 }
