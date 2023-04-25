@@ -18,7 +18,7 @@
 <body>
 
 	<div class="h-20 flex container mx-auto text-4xl">
-		<a href="/" class="h-full px-3 flex items-center"><span><i class="fa-sharp fa-solid fa-face-smile-wink"></i></span></a>
+		<a href="/" class="px-3 flex items-center"><span><i class="fa-sharp fa-solid fa-face-smile-wink"></i></span></a>
 		<div class="flex-grow"></div>
 		<ul class="flex">
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/"><span>HOME</span></a></li>
