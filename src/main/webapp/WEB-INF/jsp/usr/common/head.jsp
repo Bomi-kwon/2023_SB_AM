@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +17,19 @@
 </head>
 <body>
 
-	<div class="h-20 flex container mx-auto text-4xl">
+	<div class="h-20 flex container mx-auto text-2xl">
 		<a href="/" class="px-3 flex items-center"><span><i class="fa-sharp fa-solid fa-face-smile-wink"></i></span></a>
 		<div class="flex-grow"></div>
 		<ul class="flex">
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/"><span>HOME</span></a></li>
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list"><span>LIST</span></a></li>
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>LOGIN</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/"><span>홈</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list"><span>게시판</span></a></li>
+			<c:if test="${rq.getLoginedMemberId() == 0 }">
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>로그인</span></a></li>
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/join"><span>회원가입</span></a></li>
+			</c:if>
+			<c:if test="${rq.getLoginedMemberId() != 0 }">
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/doLogout"><span>로그아웃</span></a></li>
+			</c:if>
 		</ul>
 	</div>
 	

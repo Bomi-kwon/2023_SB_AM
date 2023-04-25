@@ -1,5 +1,6 @@
 package com.koreaIT.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,18 @@ public class UsrMemberController {
 	}
 	
 	//액션메서드
+	@RequestMapping("/usr/member/join")
+	public String join(HttpSession httpSession, String loginID, String loginPW) {
+		return "usr/member/join";
+	}
+	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public ResultData<Member> doJoin(HttpSession httpSession, String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
+	public ResultData<Member> doJoin(HttpSession httpSession, HttpServletRequest req,String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
 		
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			return ResultData.from("F-0", "로그아웃 후 이용해주세요.");
-		}
+//		if (httpSession.getAttribute("loginedMemberId") != null) {
+//			return ResultData.from("F-0", "로그아웃 후 이용해주세요.");
+//		}
 		
 		if(Util.empty(loginID)) {
 			return ResultData.from("F-1", "아이디를 입력해주세요.");
@@ -66,13 +72,18 @@ public class UsrMemberController {
 		return ResultData.from(doJoinRd.getResultCode(), doJoinRd.getMsg(), "member" ,member);
 	}
 	
+	@RequestMapping("/usr/member/login")
+	public String login(HttpSession httpSession, String loginID, String loginPW) {
+		return "usr/member/login";
+	}
+	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public ResultData doLogin(HttpSession httpSession, String loginID, String loginPW) {
-		 
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			return ResultData.from("F-1", "로그아웃 후 이용해주세요.");
-		}
+		
+//		if (rq.getLoginedMemberId() != 0) {
+//			return ResultData.from("F-1", "로그아웃 후 이용해주세요.");
+//		}
 		
 		if(Util.empty(loginID)) {
 			return ResultData.from("F-2", "아이디를 입력해주세요.");
@@ -99,15 +110,15 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public ResultData doLogout(HttpSession httpSession) {
-		 
-		if (httpSession.getAttribute("loginedMemberId") == null) {
-			return ResultData.from("F-1", "로그인 후 이용해주세요.");
-		}
+	public String doLogout(HttpSession httpSession, HttpServletRequest req) {
+		
+//		if (rq.getLoginedMemberId() == 0) {
+//			return ResultData.from("F-1", "로그인 후 이용해주세요.");
+//		}
 		
 		httpSession.removeAttribute("loginedMemberId");
 		
-		return ResultData.from("S-1", "로그아웃 되었습니다.");
+		return Util.jsReplace("로그아웃 되었습니다.", "/usr/home/main");
 	}
 	
 	
