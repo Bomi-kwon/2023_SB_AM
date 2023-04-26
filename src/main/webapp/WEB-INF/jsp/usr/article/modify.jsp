@@ -4,18 +4,6 @@
 <c:set var="pageTitle" value="Modify" />
 <%@ include file="../common/head.jsp" %>
 
-<script type="text/javascript">
-	function check() {
-		if(rq.getLoginedMemberId() = 0) {
-			alert('로그인 후 이용해주세요.');
-			location.replace("/usr/member/login");
-			return;
-		}
-		check();
-	}
-</script>
-
-
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
 			<form action="doModify" onsubmit="logincheck(this); return false;">

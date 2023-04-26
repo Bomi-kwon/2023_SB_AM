@@ -38,4 +38,10 @@
 		</div>
 	</section>
 	
+	<div>
+		<c:if test="${rq.getLoginedMemberId() != 0 }">
+			<a class="btn-text-link" href="write">글 쓰기</a>
+		</c:if>
+	</div>
+	
 <%@ include file="../common/foot.jsp" %>
