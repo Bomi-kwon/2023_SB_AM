@@ -15,7 +15,7 @@ public class DontNeedLoginInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		Rq rq = (Rq)request.getAttribute("Rq");
+		Rq rq = (Rq)request.getAttribute("rq");
 		
 		if(rq.getLoginedMemberId() != 0) {
 			rq.jsPrintHistoryBack("로그아웃 후 이용해 주세요.");

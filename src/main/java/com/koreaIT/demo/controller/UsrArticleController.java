@@ -30,7 +30,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
 		
-		Rq rq = (Rq) req.getAttribute("Rq");
+		Rq rq = (Rq) req.getAttribute("rq");
 		
 		if(Util.empty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요.");
@@ -62,7 +62,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(int id, Model model, HttpServletRequest req) {
 		
-		Rq rq = (Rq) req.getAttribute("Rq");
+		Rq rq = (Rq) req.getAttribute("rq");
 		
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
@@ -72,22 +72,19 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/modify")
-	@ResponseBody
-	public String modify(HttpServletRequest req, int id, String title, String body, Model model) {
+	public String modify(int id, Model model, HttpServletRequest req) {
 		
-		Rq rq = (Rq) req.getAttribute("Rq");
+		Rq rq = (Rq) req.getAttribute("rq");
 		
-		if ( rq.getLoginedMemberId() == 0) {
-			return Util.jsHistoryBack("로그인 후 이용해주세요.");
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+		
+		ResultData actorCanMD = articleService.actorCanMD(rq.getLoginedMemberId(), article);
+		
+		if(actorCanMD.isFail()) {
+			return rq.jsReturnOnView(actorCanMD.getMsg(), true);
 		}
 		
-		Article article = articleService.getArticleById(id);
-		
-		ResultData actorCanModifyRd = articleService.actorCanMD(rq.getLoginedMemberId(), article);
-		
-		if(actorCanModifyRd.isFail()) {
-			return Util.jsHistoryBack(actorCanModifyRd.getMsg());
-		}
+		model.addAttribute("article", article);
 		
 		return "usr/article/modify";
 	}
@@ -97,11 +94,11 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body, Model model) {
 		
-		Rq rq = (Rq) req.getAttribute("Rq");
+		Rq rq = (Rq) req.getAttribute("rq");
 		
-//		if ( rq.getLoginedMemberId() == 0) {
-//			return ResultData.from("F-A", "로그인 후 이용해주세요.");
-//		}
+		if ( rq.getLoginedMemberId() == 0) {
+			return ResultData.from("F-A", "로그인 후 이용해주세요.");
+		}
 		
 		Article article = articleService.getArticleById(id);
 		
@@ -118,11 +115,11 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doDelete(HttpServletRequest req, int id) {
 		
-		Rq rq = (Rq) req.getAttribute("Rq");
+		Rq rq = (Rq) req.getAttribute("rq");
 		
-//		if ( rq.getLoginedMemberId() == 0) {
-//			return Util.jsHistoryBack("로그인 후 이용해주세요.");
-//		}
+		if ( rq.getLoginedMemberId() == 0) {
+			return Util.jsHistoryBack("로그인 후 이용해주세요.");
+		}
 		
 		Article article = articleService.getArticleById(id);
 		

@@ -67,6 +67,10 @@ public class ArticleService {
 			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다");
 		}
 		
+		if(loginedMemberId == 0) {
+			return ResultData.from("F-2", "로그인 후 이용해주세요.");
+		}
+		
 		if (loginedMemberId != article.getMemberId()) {
 			return ResultData.from("F-B", "해당 게시물에 대한 권한이 없습니다");	
 		}
