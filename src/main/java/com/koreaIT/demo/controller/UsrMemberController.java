@@ -73,39 +73,39 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("/usr/member/login")
-	public String login(HttpSession httpSession, String loginID, String loginPW) {
+	public String login() {
 		return "usr/member/login";
 	}
 	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public ResultData doLogin(HttpSession httpSession, String loginID, String loginPW) {
+	public String doLogin(HttpSession httpSession, String loginID, String loginPW) {
 		
-//		if (rq.getLoginedMemberId() != 0) {
-//			return ResultData.from("F-1", "로그아웃 후 이용해주세요.");
-//		}
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			return Util.jsHistoryBack("로그아웃 후 이용해주세요.");
+		}
 		
 		if(Util.empty(loginID)) {
-			return ResultData.from("F-2", "아이디를 입력해주세요.");
+			return Util.jsHistoryBack("아이디를 입력해주세요.");
 		}
 		
 		if(Util.empty(loginPW)) {
-			return ResultData.from("F-3", "비밀번호를 입력해주세요.");
+			return Util.jsHistoryBack("비밀번호를 입력해주세요.");
 		}
 		
 		Member member = memberService.getMemberByLoginID(loginID);
 		
 		if (member == null) {
-			return ResultData.from("F-4", Util.f("%s는 존재하지 않는 아이디입니다.", loginID));
+			return Util.jsHistoryBack(Util.f("%s는 존재하지 않는 아이디입니다."));
 		}
 		
 		if (!member.getLoginPW().equals(loginPW)) {
-			return ResultData.from("F-5", "비밀번호가 일치하지 않습니다.");
+			return Util.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 		
 		httpSession.setAttribute("loginedMemberId", member.getId());
 		
-		return ResultData.from("S-1", Util.f("%s님 로그인을 성공했습니다. 환영합니다~!", member.getNickname()));
+		return Util.jsReplace(Util.f("%s님 로그인을 성공했습니다. 환영합니다~!", member.getNickname()), "/");
 	}
 	
 	@RequestMapping("/usr/member/doLogout")

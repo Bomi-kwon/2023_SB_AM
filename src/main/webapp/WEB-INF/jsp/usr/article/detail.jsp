@@ -7,7 +7,7 @@
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
 			<div class="table-box-type-1">
-				<table border="1" class="mx-auto">
+				<table border="1" class="mx-auto bg-yellow-50">
 					<colgroup>
 						<col width="100"/>
 						<col width="700"/>
@@ -40,7 +40,7 @@
 			</div>
 			
 			<div class="btns">
-				<button class="btn-text-link" type="button" onclick="history.back();">뒤로</button>
+				<button class="btn-text-link" type="button" onclick="history.back();">목록</button>
 					<c:if test="${article.actorCanChangeData}">
 						<a class="btn-text-link" href="modify?id=${article.id }">수정</a>
 						<a class="btn-text-link" href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;">삭제</a>

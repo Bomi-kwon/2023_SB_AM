@@ -71,6 +71,28 @@ public class UsrArticleController {
 		return "usr/article/detail";
 	}
 	
+	@RequestMapping("/usr/article/modify")
+	@ResponseBody
+	public String modify(HttpServletRequest req, int id, String title, String body, Model model) {
+		
+		Rq rq = (Rq) req.getAttribute("Rq");
+		
+		if ( rq.getLoginedMemberId() == 0) {
+			return Util.jsHistoryBack("로그인 후 이용해주세요.");
+		}
+		
+		Article article = articleService.getArticleById(id);
+		
+		ResultData actorCanModifyRd = articleService.actorCanMD(rq.getLoginedMemberId(), article);
+		
+		if(actorCanModifyRd.isFail()) {
+			return Util.jsHistoryBack(actorCanModifyRd.getMsg());
+		}
+		
+		return "usr/article/modify";
+	}
+	
+	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body, Model model) {
