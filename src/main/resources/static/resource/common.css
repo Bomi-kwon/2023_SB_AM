@@ -29,3 +29,7 @@ html > body {
 	color:red;
 	text-decoration: underline;
 }
+
+.table-box-type-1 tr.red {
+color : red;
+}

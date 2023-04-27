@@ -25,18 +25,18 @@
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
 			<form action="doLogin" onsubmit="logincheck(this); return false;">
-				<div class="table-box-type-1">
-						<table border="1" class="mx-auto bg-yellow-50">
+				<div class="table-box-type-1 overflow-x-auto">
+						<table border="1" class="mx-auto able w-full">
 							<tr>
 								<th align="right">로그인 아이디</th>
-								<td><input class="w-96" type="text" name="loginID" placeholder="아이디를 입력해주세요" autocomplete="on"/></td>
+								<td><input class="input input-bordered input-warning w-full max-w-xs" type="text" name="loginID" placeholder="아이디를 입력해주세요" autocomplete="on"/></td>
 							</tr>
 							<tr>
 								<th align="right">로그인 비밀번호</th>
-								<td><input class="w-96" type="text" name="loginPW" placeholder="비밀번호를 입력해주세요"/></td>
+								<td><input class="input input-bordered input-warning w-full max-w-xs" type="text" name="loginPW" placeholder="비밀번호를 입력해주세요"/></td>
 							</tr>
 							<tr>
-								<td colspan="2"><button>로그인</button></td>
+								<td colspan="2"><button class="btn btn-outline btn-warning">로그인</button></td>
 							</tr>
 						</table>
 				</div>

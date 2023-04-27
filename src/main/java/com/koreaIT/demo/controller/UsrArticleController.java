@@ -101,10 +101,6 @@ public class UsrArticleController {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
 		
-		if ( rq.getLoginedMemberId() == 0) {
-			return Util.jsHistoryBack("로그인 후 이용해주세요.");
-		}
-		
 		Article article = articleService.getArticleById(id);
 		
 		ResultData actorCanModifyRd = articleService.actorCanMD(rq.getLoginedMemberId(), article);
@@ -123,10 +119,6 @@ public class UsrArticleController {
 	public String doDelete(HttpServletRequest req, int id) {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
-		
-		if ( rq.getLoginedMemberId() == 0) {
-			return Util.jsHistoryBack("로그인 후 이용해주세요.");
-		}
 		
 		Article article = articleService.getArticleById(id);
 		
