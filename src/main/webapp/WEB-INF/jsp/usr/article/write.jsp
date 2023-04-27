@@ -6,7 +6,7 @@
 
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
-			<form action="doAdd" onsubmit="logincheck(this); return false;">
+			<form action="doWrite" onsubmit="logincheck(this); return false;">
 			<div class="table-box-type-1 overflow-x-auto">
 					<table border="1" class="mx-auto able w-full">
 					<colgroup>
@@ -15,7 +15,7 @@
 					</colgroup>
 					<tr>
 						<th>제목</th>
-						<td><input class="input input-bordered input-success w-full max-w-xs" type="text" name="title" placeholder="제목을 입력해주세요."/></td>
+						<td><input class="input input-bordered input-success w-full" type="text" name="title" placeholder="제목을 입력해주세요."/></td>
 					</tr>
 					<tr>
 						<th>내용</th>
@@ -27,10 +27,11 @@
 				</table>
 			</div>
 				</form>
-		</div>
-	</section>
-			<div class="btns">
+			<div class="btns flex justify-start">
 				<button class="btn-text-link btn btn-outline btn-success" type="button" onclick="history.back();">뒤로</button>
 			</div>
+		</div>
+	</section>
+			
 	
 <%@ include file="../common/foot.jsp" %>

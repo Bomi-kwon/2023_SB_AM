@@ -39,7 +39,7 @@
 				</table>
 			</div>
 			
-			<div class="btns">
+			<div class="btns flex justify-end">
 				<button class="btn-text-link btn btn-outline btn-success" type="button" onclick="history.back();">목록</button>
 					<c:if test="${article.actorCanChangeData}">
 						<a class="btn-text-link btn btn-outline btn-success" href="modify?id=${article.id }">수정</a>

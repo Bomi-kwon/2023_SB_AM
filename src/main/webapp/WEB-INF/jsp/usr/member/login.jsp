@@ -29,11 +29,11 @@
 						<table border="1" class="mx-auto able w-full">
 							<tr>
 								<th align="right">로그인 아이디</th>
-								<td><input class="input input-bordered input-warning w-full max-w-xs" type="text" name="loginID" placeholder="아이디를 입력해주세요" autocomplete="on"/></td>
+								<td><input class="input input-bordered input-warning w-full" type="text" name="loginID" placeholder="아이디를 입력해주세요" autocomplete="on"/></td>
 							</tr>
 							<tr>
 								<th align="right">로그인 비밀번호</th>
-								<td><input class="input input-bordered input-warning w-full max-w-xs" type="text" name="loginPW" placeholder="비밀번호를 입력해주세요"/></td>
+								<td><input class="input input-bordered input-warning w-full" type="text" name="loginPW" placeholder="비밀번호를 입력해주세요"/></td>
 							</tr>
 							<tr>
 								<td colspan="2"><button class="btn btn-outline btn-warning">로그인</button></td>

@@ -63,31 +63,31 @@
 					<table border="1" class="mx-auto able w-full">
 						<tr>
 							<th align="right">아이디</th>
-							<td><input class="input input-bordered input-warning w-full max-w-xs" type="text" name="loginID" placeholder="아이디를 입력해주세요" autocomplete="on"/>
+							<td><input class="input input-bordered input-warning w-full" type="text" name="loginID" placeholder="아이디를 입력해주세요" autocomplete="on"/>
 						</tr>		
 						<tr>
 							<th align="right">비밀번호</th>
-							<td><input class="input input-bordered input-warning w-full max-w-xs" type="password" name="loginPW" placeholder="비밀번호를 입력해주세요"/></td>
+							<td><input class="input input-bordered input-warning w-full" type="password" name="loginPW" placeholder="비밀번호를 입력해주세요"/></td>
 						</tr>
 						<tr>
 							<th align="right">비밀번호 확인</th>
-							<td><input class="input input-bordered input-warning w-full max-w-xs" type="password" name="loginPWCheck" placeholder="비밀번호 확인을 입력해주세요"/></td>
+							<td><input class="input input-bordered input-warning w-full" type="password" name="loginPWCheck" placeholder="비밀번호 확인을 입력해주세요"/></td>
 						</tr>
 						<tr>
 							<th align="right">이름</th>
-							<td><input class="input input-bordered input-warning w-full max-w-xs" type="text" name="name" placeholder="이름을 입력해주세요"/></td>
+							<td><input class="input input-bordered input-warning w-full" type="text" name="name" placeholder="이름을 입력해주세요"/></td>
 						</tr>
 						<tr>
 							<th align="right">닉네임</th>
-							<td><input class="input input-bordered input-warning w-full max-w-xs" type="text" name="nickname" placeholder="닉네임을 입력해주세요"/></td>
+							<td><input class="input input-bordered input-warning w-full" type="text" name="nickname" placeholder="닉네임을 입력해주세요"/></td>
 						</tr>
 						<tr>
 							<th align="right">전화번호</th>
-							<td><input class="input input-bordered input-warning w-full max-w-xs" type="text" name="cellphoneNum" placeholder="전화번호를 입력해주세요"/></td>
+							<td><input class="input input-bordered input-warning w-full" type="text" name="cellphoneNum" placeholder="전화번호를 입력해주세요"/></td>
 						</tr>
 						<tr>
 							<th align="right">이메일</th>
-							<td><input class="input input-bordered input-warning w-full max-w-xs" type="text" name="email" placeholder="이메일을 입력해주세요"/></td>
+							<td><input class="input input-bordered input-warning w-full" type="text" name="email" placeholder="이메일을 입력해주세요"/></td>
 						</tr>
 						<tr>
 							<td colspan="2"><button class="btn btn-outline btn-warning">가입</button></td>

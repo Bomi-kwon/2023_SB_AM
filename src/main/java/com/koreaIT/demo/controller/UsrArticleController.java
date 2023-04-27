@@ -31,9 +31,9 @@ public class UsrArticleController {
 		return "usr/article/write";
 	}
 	
-	@RequestMapping("/usr/article/doAdd")
+	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doAdd(HttpServletRequest req, String title, String body) {
+	public String doWrite(HttpServletRequest req, String title, String body) {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
 		

@@ -32,7 +32,7 @@
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input class="input input-bordered input-success w-full max-w-xs" type="text" name="title" value="${article.title }" placeholder="제목을 입력해주세요."/></td>
+						<td><input class="input input-bordered input-success w-full" type="text" name="title" value="${article.title }" placeholder="제목을 입력해주세요."/></td>
 					</tr>
 					<tr>
 						<th>내용</th>
