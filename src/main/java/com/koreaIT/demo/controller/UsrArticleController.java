@@ -11,18 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.ArticleService;
+import com.koreaIT.demo.service.BoardService;
 import com.koreaIT.demo.util.Util;
 import com.koreaIT.demo.vo.Article;
+import com.koreaIT.demo.vo.Board;
 import com.koreaIT.demo.vo.ResultData;
 import com.koreaIT.demo.vo.Rq;
 
 @Controller
 public class UsrArticleController {
 	private ArticleService articleService;
+	private BoardService boardService;
 	
 	@Autowired
-	public UsrArticleController(ArticleService articleService) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService) {
 		this.articleService = articleService;
+		this.boardService = boardService;
 	}
 	
 	//액션메서드
@@ -53,11 +57,14 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model) {
+	public String showList(Model model, int boardId) {
 		
-		List<Article> articles = articleService.getArticles();
+		Board board = boardService.getBoardById(boardId);
+		
+		List<Article> articles = articleService.getArticles(boardId);
 		
 		model.addAttribute("articles", articles);
+		model.addAttribute("board", board);
 		
 		return "usr/article/list";
 	}

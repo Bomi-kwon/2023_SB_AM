@@ -24,7 +24,8 @@
 		<div class="flex-grow"></div>
 		<ul class="flex">
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/"><span>홈</span></a></li>
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list"><span>게시판</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>공지사항</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>자유게시판</span></a></li>
 			<c:if test="${rq.getLoginedMemberId() == 0 }">
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>로그인</span></a></li>
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/join"><span>회원가입</span></a></li>
@@ -37,6 +38,6 @@
 	
 	<section class="my-3 text-2xl">
 		<div class="container mx-auto px-3">
-			<h1>${pageTitle }&nbsp;Page</h1>
+			<h1>${pageTitle }&nbsp;</h1>
 		</div>
 	</section>

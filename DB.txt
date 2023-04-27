@@ -19,6 +19,9 @@ CREATE TABLE article(
 ALTER TABLE article
 ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 
+ALTER TABLE article
+ADD COLUMN boardId INT UNSIGNED NOT NULL AFTER memberId;
+
 # member 테이블 삭제
 DROP TABLE `member`;
 
@@ -38,9 +41,21 @@ CREATE TABLE `member`(
 	delData DATETIME COMMENT '탈퇴 날짜'
 );
 
+#board 테이블 생성
+CREATE TABLE board (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	`code` VARCHAR(20) NOT NULL UNIQUE COMMENT 'notice(공지사항), free(자유), ...',
+	`name` VARCHAR(20) NOT NULL UNIQUE COMMENT '게시판 이름',
+	delStatus TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제여부 (삭제 전 = 0, 삭제 후 = 1)',
+	delData DATETIME COMMENT '삭제 날짜'
+);
+
 # 테이블 구조 확인
 DESC article;
 DESC `member`;
+DESC board;
 
 # article 테스트 데이터
 INSERT INTO article
@@ -73,25 +88,19 @@ nickname = '관리자',
 cellphoneNum = '010-0000-0000',
 email = 'imtheking@naver.com';
 
-INSERT INTO `member`
+# board 테스트 데이터
+INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-loginID = 'test1',
-loginPW = 'test1',
-`name` = '도라에몽',
-nickname = '도라에몽',
-cellphoneNum = '010-1111-1111',
-email = 'doraemong@naver.com';
+`code` = 'notice',
+`name` = '공지사항';
 
-INSERT INTO `member`
+INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-loginID = 'test2',
-loginPW = 'test2',
-`name` = '퉁퉁이',
-nickname = '퉁퉁이',
-cellphoneNum = '010-2222-2222',
-email = 'toong@naver.com';
+`code` = 'free',
+`name` = '자유';
+
 
 # 데이터 갯수 곱하기 2배씩
 INSERT INTO article(regDate, updateDate, title, `body`)
@@ -105,10 +114,13 @@ ORDER BY id DESC;
 SELECT * FROM `member`
 ORDER BY id DESC;
 
+SELECT * FROM board
+ORDER BY id DESC;
+
 DELETE FROM `member`
 WHERE `name` = '진구';
 
 UPDATE article
-SET memberId = 3
-WHERE id = 5 OR id = 6 OR id = 7;
+SET boardId = 2
+WHERE memberId != 1;
 
