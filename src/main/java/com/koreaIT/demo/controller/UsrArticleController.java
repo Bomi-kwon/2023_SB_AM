@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.ArticleService;
@@ -57,7 +58,11 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, int boardId) {
+	public String showList(Model model, @RequestParam(defaultValue = "2") int boardId, @RequestParam(defaultValue = "1") int page) {
+		
+		if(page <= 0) {
+			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다.", true);
+		}
 		
 		Board board = boardService.getBoardById(boardId);
 		
@@ -65,12 +70,18 @@ public class UsrArticleController {
 			return rq.jsReturnOnView("존재하지 않는 게시판입니다.", true);
 		}
 		
-		List<Article> articles = articleService.getArticles(boardId);
 		int numberofarticles = articleService.getNumberOfArticles(boardId);
 		
+		int itemsInAPage = 10;
+		int pagesCount = (int) Math.ceil(numberofarticles / (double) itemsInAPage);
+		
+		List<Article> articles = articleService.getArticles(boardId, itemsInAPage, page);
+		
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page);
+		model.addAttribute("numberofarticles", numberofarticles);
 		model.addAttribute("articles", articles);
 		model.addAttribute("board", board);
-		model.addAttribute("numberofarticles", numberofarticles);
 		
 		return "usr/article/list";
 	}

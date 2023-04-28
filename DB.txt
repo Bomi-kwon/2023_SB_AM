@@ -103,9 +103,10 @@ updateDate = NOW(),
 
 
 # 데이터 갯수 곱하기 2배씩
-INSERT INTO article(regDate, updateDate, title, `body`)
-SELECT NOW(), NOW(), CONCAT('제목_', RAND()), CONCAT('내용_', RAND())
+INSERT INTO article(regDate, updateDate, memberId, boardId, title, `body`)
+SELECT NOW(), NOW(), FLOOR(RAND()*8) + 1, 2, CONCAT('제목', RAND()), '내용~'
 FROM article;
+
 
 # 데이터 확인
 SELECT * FROM article
@@ -124,3 +125,6 @@ UPDATE article
 SET boardId = 2
 WHERE memberId != 1;
 
+SELECT COUNT(*)
+FROM article
+WHERE boardId = 1
