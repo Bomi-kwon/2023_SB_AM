@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="Detail" />
-
 <%@ include file="../common/head.jsp" %>
+
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
-			<div class="table-box-type-1 overflow-x-auto">
+			<div class="table-box-type-1">
 				<table border="1" class="mx-auto table w-full">
 					<colgroup>
 						<col width="100"/>
@@ -34,13 +34,15 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td>${article.body }</td>
+						<td>
+							<div class="overflow-y-scroll">${article.body }</div>
+						</td>
 					</tr>
 				</table>
 			</div>
 			
 			<div class="btns flex justify-end">
-				<button class="btn-text-link btn btn-outline btn-success" type="button" onclick="history.back();">목록</button>
+				<a class="btn-text-link btn btn-outline btn-success" href="list">목록</a>
 					<c:if test="${article.actorCanChangeData}">
 						<a class="btn-text-link btn btn-outline btn-success" href="modify?id=${article.id }">수정</a>
 						<a class="btn-text-link btn btn-outline btn-success" href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;">삭제</a>

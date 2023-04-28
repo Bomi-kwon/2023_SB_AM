@@ -31,13 +31,15 @@ public class UsrArticleController {
 	
 	//액션메서드
 	@RequestMapping("/usr/article/write")
-	public String write() {
+	public String write(int boardId, Model model) {
+		Board board = boardService.getBoardById(boardId);
+		model.addAttribute("board", board);
 		return "usr/article/write";
 	}
 	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(HttpServletRequest req, String title, String body) {
+	public String doWrite(HttpServletRequest req, String title, String body, int boardId) {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
 		
@@ -49,7 +51,7 @@ public class UsrArticleController {
 			return Util.jsHistoryBack("내용을 입력해주세요.");
 		}
 		
-		articleService.writeArticle(title, body, rq.getLoginedMemberId());
+		articleService.writeArticle(title, body, rq.getLoginedMemberId(), boardId);
 		
 		int id = articleService.getLastInsertId();
 		
@@ -137,6 +139,6 @@ public class UsrArticleController {
 		
 		articleService.deleteArticle(id);
 		
-		return Util.jsReplace(Util.f("%d번 게시물을 삭제했습니다.", id), "list");
+		return Util.jsReplace(Util.f("%d번 게시물을 삭제했습니다.", id), "list?boardId=0");
 	}
 }

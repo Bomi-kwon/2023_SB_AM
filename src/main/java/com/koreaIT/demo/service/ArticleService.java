@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.koreaIT.demo.repository.ArticleRepository;
-import com.koreaIT.demo.util.Util;
 import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.ResultData;
 
@@ -19,8 +18,8 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 
-	public void writeArticle(String title, String body, int memberId) {
-		articleRepository.writeArticle(title, body, memberId);
+	public void writeArticle(String title, String body, int memberId, int boardId) {
+		articleRepository.writeArticle(title, body, memberId, boardId);
 	}
 	
 	public int getLastInsertId() {

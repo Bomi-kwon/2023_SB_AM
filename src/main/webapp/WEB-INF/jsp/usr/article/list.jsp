@@ -9,7 +9,12 @@
 		<div class="container mx-auto px-3">
 			<div class=" mb-2 flex justify-end">
 				<c:if test="${rq.getLoginedMemberId() != 0 }">
-					<a class="btn-text-link btn btn-outline btn-success" href="write">글 쓰기</a>
+					<c:if test="${board.id != 1 }">
+						<a class="btn-text-link btn btn-outline btn-success" href="write?boardId=${board.id }">글 쓰기</a>
+					</c:if>
+					<c:if test="${board.id == 1 && rq.getLoginedMemberAuthlevel() == 7}">
+						<a class="btn-text-link btn btn-outline btn-success" href="write?boardId=${board.id }">글 쓰기</a>
+					</c:if>
 				</c:if>
 			</div>
 			<div class="table-box-type-1 overflow-x-auto">
