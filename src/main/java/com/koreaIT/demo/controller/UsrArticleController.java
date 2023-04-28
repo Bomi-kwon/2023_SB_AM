@@ -69,7 +69,6 @@ public class UsrArticleController {
 			return rq.jsReturnOnView("존재하지 않는 게시판입니다.", true);
 		}
 		
-		
 		List<Article> articles = articleService.getArticles(boardId);
 		int numberofarticles = articleService.getNumberOfArticles(boardId);
 		

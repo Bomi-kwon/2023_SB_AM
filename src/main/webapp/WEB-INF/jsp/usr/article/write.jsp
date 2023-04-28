@@ -6,19 +6,27 @@
 
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
-			<select class="select select-success w-full max-w-xs">
-				  <option disabled selected>게시판 선택</option>
-				  <option>공지사항</option>
-				  <option>자유게시판</option>
-			</select>
 			<form action="doWrite" onsubmit="logincheck(this); return false;">
 			<div class="table-box-type-1 overflow-x-auto">
-			<input type="hidden" name="boardId" value="${board.id }"/>
 					<table border="1" class="mx-auto able w-full">
 					<colgroup>
 						<col width="100"/>
 						<col width="700"/>
 					</colgroup>
+					<tr>
+						<th>게시판 선택</th>
+						<td>
+						<label>
+							<input type="radio" name="boardId" value="1" />
+							&nbsp;공지사항
+						</label>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<label>
+							<input type="radio" name="boardId" value="2" checked />
+							&nbsp;자유게시판
+						</label>
+						</td>
+					</tr>
 					<tr>
 						<th>제목</th>
 						<td><input class="input input-bordered input-success w-full" type="text" name="title" placeholder="제목을 입력해주세요."/></td>
