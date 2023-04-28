@@ -1,7 +1,5 @@
 package com.koreaIT.demo.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +14,12 @@ import com.koreaIT.demo.vo.Rq;
 @Controller
 public class UsrMemberController {
 	private MemberService memberService;
+	private Rq rq;
 	
 	@Autowired
-	public UsrMemberController(MemberService memberService) {
+	public UsrMemberController(MemberService memberService, Rq rq) {
 		this.memberService = memberService;
+		this.rq = rq;
 	}
 	
 	//액션메서드
@@ -30,9 +30,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(HttpServletRequest req,String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doJoin(String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
 		
 		if ( rq.getLoginedMemberId() != 0) {
 			return Util.jsHistoryBack("로그아웃 후 이용해주세요.");
@@ -78,9 +76,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(HttpServletRequest req, String loginID, String loginPW) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doLogin(String loginID, String loginPW) {
 		
 		if ( rq.getLoginedMemberId() != 0) {
 			return Util.jsHistoryBack("로그아웃 후 이용해주세요.");
@@ -111,9 +107,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public String doLogout(HttpServletRequest req) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doLogout() {
 		
 		if ( rq.getLoginedMemberId() == 0) {
 			return Util.jsHistoryBack("로그인 후 이용해주세요.");

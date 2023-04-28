@@ -2,8 +2,6 @@ package com.koreaIT.demo.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +20,13 @@ import com.koreaIT.demo.vo.Rq;
 public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
+	private Rq rq;
 	
 	@Autowired
-	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.rq = rq;
 	}
 	
 	//액션메서드
@@ -39,9 +39,7 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(HttpServletRequest req, String title, String body, int boardId) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doWrite(String title, String body, int boardId) {
 		
 		if(Util.empty(title)) {
 			return Util.jsHistoryBack("제목을 입력해주세요.");
@@ -59,9 +57,7 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String showList(HttpServletRequest req, Model model, int boardId) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String showList(Model model, int boardId) {
 		
 		Board board = boardService.getBoardById(boardId);
 		
@@ -80,9 +76,7 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(int id, Model model, HttpServletRequest req) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String showDetail(int id, Model model) {
 		
 		Article article = articleService.getForPrintArticle(id);
 		
@@ -94,9 +88,7 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/modify")
-	public String modify(int id, Model model, HttpServletRequest req) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String modify(int id, Model model) {
 		
 		Article article = articleService.getForPrintArticle(id);
 		
@@ -114,9 +106,7 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(HttpServletRequest req, int id, String title, String body, Model model) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doModify(int id, String title, String body, Model model) {
 		
 		Article article = articleService.getArticleById(id);
 		
@@ -133,9 +123,7 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(HttpServletRequest req, int id) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doDelete(int id) {
 		
 		Article article = articleService.getArticleById(id);
 		
