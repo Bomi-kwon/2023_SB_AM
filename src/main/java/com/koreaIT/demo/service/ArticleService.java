@@ -73,5 +73,9 @@ public class ArticleService {
 		return ResultData.from("S-1", "권한 있음");
 	}
 
+	public int getNumberOfArticles(int boardId) {
+		return articleRepository.getNumberOfArticles(boardId);
+	}
+
 	
 }

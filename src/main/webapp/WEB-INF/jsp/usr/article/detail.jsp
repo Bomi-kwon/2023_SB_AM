@@ -35,7 +35,7 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<div class="overflow-y-scroll">${article.body }</div>
+							<div class="overflow-y-auto">${article.body }</div>
 						</td>
 					</tr>
 				</table>

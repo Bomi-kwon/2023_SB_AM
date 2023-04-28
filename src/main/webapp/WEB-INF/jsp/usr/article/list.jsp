@@ -7,7 +7,8 @@
 
 	<section class="mt-8 mx-auto text-xl">
 		<div class="container mx-auto px-3">
-			<div class=" mb-2 flex justify-end">
+			<div class=" mb-2 flex justify-between items-center">
+				<div>글 갯수 : ${numberofarticles }</div>
 				<c:if test="${rq.getLoginedMemberId() != 0 }">
 					<c:if test="${board.id != 1 }">
 						<a class="btn-text-link btn btn-outline btn-success" href="write?boardId=${board.id }">글 쓰기</a>
