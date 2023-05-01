@@ -35,6 +35,13 @@
 		INNER JOIN `member` AS M
 		ON A.memberId = M.id
 		WHERE 1 = 1 
+		<if test="keyWord != ''">
+			<choose>
+				<when test="keyWordType == 'title'"> AND A.title LIKE CONCAT('%',#{keyWord},'%') </when>
+		    	<when test="keyWordType == 'body'"> AND A.body LIKE CONCAT('%',#{keyWord},'%') </when>
+		    	<otherwise> AND (A.title LIKE CONCAT('%',#{keyWord},'%') OR A.body LIKE CONCAT('%',#{keyWord},'%'))</otherwise>
+			</choose>
+		</if>
 		<if test="boardId != 0">
 			AND A.boardId = #{boardId}
 		</if>
@@ -46,6 +53,13 @@
 		SELECT COUNT(*)
 		FROM article
 		WHERE boardId = #{boardId}
+		<if test="keyWord != ''">
+			<choose>
+				<when test="keyWordType == 'title'"> AND title LIKE CONCAT('%',#{keyWord},'%') </when>
+		    	<when test="keyWordType == 'body'"> AND `body` LIKE CONCAT('%',#{keyWord},'%') </when>
+		    	<otherwise> AND (title LIKE CONCAT('%',#{keyWord},'%') OR `body` LIKE CONCAT('%',#{keyWord},'%'))</otherwise>
+			</choose>
+		</if>
 	</select>
 	
 	<delete id="deleteArticle">

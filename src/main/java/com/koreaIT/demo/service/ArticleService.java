@@ -39,11 +39,11 @@ public class ArticleService {
 		articleRepository.modifyArticle(id, title, body);
 	}
 
-	public List<Article> getArticles(int boardId, int itemsInAPage, int page) {
+	public List<Article> getArticles(int boardId, int itemsInAPage, int page, String keyWordType, String keyWord) {
 		
 		int limitStart = (page - 1) * itemsInAPage;
 		
-		return articleRepository.getArticles(boardId, limitStart, itemsInAPage);
+		return articleRepository.getArticles(boardId, limitStart, itemsInAPage, keyWordType, keyWord);
 	}
 
 	public Article getForPrintArticle(int id) {
@@ -76,9 +76,10 @@ public class ArticleService {
 		return ResultData.from("S-1", "권한 있음");
 	}
 
-	public int getNumberOfArticles(int boardId) {
-		return articleRepository.getNumberOfArticles(boardId);
+	public int getNumberOfArticles(int boardId, String keyWordType, String keyWord) {
+		return articleRepository.getNumberOfArticles(boardId, keyWordType, keyWord);
 	}
+
 
 	
 }

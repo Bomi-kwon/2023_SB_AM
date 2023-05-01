@@ -15,7 +15,7 @@ public interface ArticleRepository {
 	
 	public Article getArticleById(int id);
 	
-	public List<Article> getArticles(int boardId, int limitStart, int itemsInAPage);
+	public List<Article> getArticles(int boardId, int limitStart, int itemsInAPage, String keyWordType, String keyWord);
 	
 	public void deleteArticle(int id);
 
@@ -23,6 +23,6 @@ public interface ArticleRepository {
 
 	public Article getForPrintArticle(int id);
 
-	public int getNumberOfArticles(int boardId);
+	public int getNumberOfArticles(int boardId, String keyWordType, String keyWord);
 
 }
