@@ -29,11 +29,11 @@
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input class="input input-bordered input-success w-full" type="text" name="title" placeholder="제목을 입력해주세요."/></td>
+						<td><input class="input input-bordered input-success w-full" type="text" name="title" placeholder="제목을 입력해주세요." required/></td>
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea class="textarea textarea-success w-full" name="body" placeholder="내용을 입력해주세요." ></textarea></td>
+						<td><textarea class="textarea textarea-success w-full" name="body" placeholder="내용을 입력해주세요." required></textarea></td>
 					</tr>
 					<tr>
 						<td colspan="2"><button class="btn btn-outline btn-success">작성</button></td>
