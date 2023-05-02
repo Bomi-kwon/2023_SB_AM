@@ -62,6 +62,10 @@ public class UsrArticleController {
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "title") String keyWordType, 
 			@RequestParam(defaultValue = "") String keyWord) {
 		
+		if(keyWordType!="title" && keyWordType!="body" && keyWordType!="all") {
+			keyWordType = "title";
+		}
+		
 		if(page <= 0) {
 			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다.", true);
 		}
@@ -92,13 +96,15 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(int id, Model model) {
 		
+		ResultData<Integer> increseHitRd = articleService.increaseHit(id);
+		
+		if(increseHitRd.isFail()) {
+			return rq.jsReturnOnView(increseHitRd.getMsg(), true);
+		}
+		
 		Article article = articleService.getForPrintArticle(id);
 		
 		articleService.actorCanChangeData(rq.getLoginedMemberId(), article);
-		
-		articleService.increaseHit(id, article.getHit());
-		
-		article = articleService.getForPrintArticle(id);
 		
 		model.addAttribute("article", article);
 		

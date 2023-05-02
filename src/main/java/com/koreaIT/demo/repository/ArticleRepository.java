@@ -25,6 +25,6 @@ public interface ArticleRepository {
 
 	public int getNumberOfArticles(int boardId, String keyWordType, String keyWord);
 
-	public void increaseHit(int id, int hit);
+	public int increaseHit(int id);
 
 }

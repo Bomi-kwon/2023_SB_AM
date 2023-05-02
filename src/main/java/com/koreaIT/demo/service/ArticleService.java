@@ -80,8 +80,15 @@ public class ArticleService {
 		return articleRepository.getNumberOfArticles(boardId, keyWordType, keyWord);
 	}
 
-	public void increaseHit(int id, int hit) {
-		articleRepository.increaseHit(id, hit);
+	public ResultData<Integer> increaseHit(int id) {
+		
+		int affectedRowsCount = articleRepository.increaseHit(id);
+		
+		if(affectedRowsCount == 0) {
+			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다.");
+		}
+		
+		return ResultData.from("S-1", "조회수 증가","affectedRowsCount", affectedRowsCount);
 	}
 
 

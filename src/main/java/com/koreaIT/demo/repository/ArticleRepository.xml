@@ -82,7 +82,7 @@
 	
 	<update id="increaseHit">
 		UPDATE article
-		SET hit = #{hit} + 1
+		SET hit = hit + 1
 		WHERE id = #{id}
 	</update>
 	
