@@ -96,6 +96,10 @@ public class UsrArticleController {
 		
 		articleService.actorCanChangeData(rq.getLoginedMemberId(), article);
 		
+		articleService.increaseHit(id, article.getHit());
+		
+		article = articleService.getForPrintArticle(id);
+		
 		model.addAttribute("article", article);
 		
 		return "usr/article/detail";
@@ -120,7 +124,7 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(int id, String title, String body, Model model) {
+	public String doModify(int id, String title, String body) {
 		
 		Article article = articleService.getArticleById(id);
 		

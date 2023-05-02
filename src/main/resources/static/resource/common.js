@@ -4,4 +4,5 @@ $('select[data-value]').each(function(index, item){
 	if (defaultValue.length > 0) {
 		items.val(defaultValue);
 	}
-})
+});
+

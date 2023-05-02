@@ -3,27 +3,16 @@ DROP DATABASE IF EXISTS SB_AM;
 CREATE DATABASE SB_AM;
 USE SB_AM;
 
-# article 테이블 삭제
-DROP TABLE article;
-
 # article 테이블 생성
 CREATE TABLE article(
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
+	memberId INT UNSIGNED NOT NULL,
+	boardId INT UNSIGNED NOT NULL,
 	title VARCHAR(100) NOT NULL,
 	`body` TEXT NOT NULL
 );
-
-# article 테이블 칼럼 추가
-ALTER TABLE article
-ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
-
-ALTER TABLE article
-ADD COLUMN boardId INT UNSIGNED NOT NULL AFTER memberId;
-
-# member 테이블 삭제
-DROP TABLE `member`;
 
 # member 테이블 생성
 CREATE TABLE `member`(
@@ -61,20 +50,26 @@ DESC board;
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-title = '제목1',
-`body` = '내용1';
+memberId = 1,
+boardId = 1,
+title = '공지사항',
+`body` = '안녕하세요';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-title = '제목2',
-`body` = '내용2';
-INSERT INTO article
+memberId = 1,
+boardId = 2,
+title = '자유게시판 첫글',
+`body` = '안녕하세요';
 
+INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-title = '제목3',
-`body` = '내용3';
+memberId = 2,
+boardId = 2,
+title = '안녕하세요',
+`body` = '반갑습니다';
 
 # member 테스트 데이터
 INSERT INTO `member`
@@ -87,6 +82,28 @@ loginPW = 'admin',
 nickname = '관리자',
 cellphoneNum = '010-0000-0000',
 email = 'imtheking@naver.com';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginID = 'test1',
+loginPW = 'test1',
+`authLevel` = 3,
+`name` = '스폰지밥',
+nickname = '스폰지밥',
+cellphoneNum = '010-1111-1111',
+email = 'ilikemonday@naver.com';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginID = 'test2',
+loginPW = 'test2',
+`authLevel` = 3,
+`name` = '뚱이',
+nickname = '뚱이',
+cellphoneNum = '010-2222-2222',
+email = 'myfavorite@naver.com';
 
 # board 테스트 데이터
 INSERT INTO board
@@ -102,11 +119,15 @@ updateDate = NOW(),
 `name` = '자유';
 
 
-# 데이터 갯수 곱하기 2배씩
+# 데이터 갯수 곱하기 2배씩 자유게시판에 쓰기
 INSERT INTO article(regDate, updateDate, memberId, boardId, title, `body`)
-SELECT NOW(), NOW(), FLOOR(RAND()*8) + 1, 2, CONCAT('제목', RAND()), '내용~'
+SELECT NOW(), NOW(), FLOOR(RAND()*3) + 1, 2, CONCAT('제목', RAND()), '내용~'
 FROM article;
 
+# 데이터 갯수 곱하기 2배씩 공지사항에 쓰기
+INSERT INTO article(regDate, updateDate, memberId, boardId, title, `body`)
+SELECT NOW(), NOW(), 1, 1, CONCAT('공지글', RAND()), '내용~'
+FROM article;
 
 # 데이터 확인
 SELECT * FROM article
@@ -118,9 +139,6 @@ ORDER BY id DESC;
 SELECT * FROM board
 ORDER BY id DESC;
 
-DELETE FROM `member`
-WHERE `name` = '진구';
-
 UPDATE article
 SET boardId = 2
 WHERE memberId != 1;
@@ -128,3 +146,4 @@ WHERE memberId != 1;
 SELECT COUNT(*)
 FROM article
 WHERE boardId = 1
+

@@ -60,5 +60,9 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
+	public void modifyMember(int id, String nickname, String cellphoneNum, String email) {
+		memberRepository.modifyMember(id, nickname, cellphoneNum, email);
+	}
+
 	
 }

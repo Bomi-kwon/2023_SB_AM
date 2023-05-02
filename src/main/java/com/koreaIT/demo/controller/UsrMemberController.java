@@ -2,11 +2,13 @@ package com.koreaIT.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.MemberService;
 import com.koreaIT.demo.util.Util;
+import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.Member;
 import com.koreaIT.demo.vo.ResultData;
 import com.koreaIT.demo.vo.Rq;
@@ -116,6 +118,35 @@ public class UsrMemberController {
 		rq.logout();
 		
 		return Util.jsReplace("로그아웃 되었습니다.", "/");
+	}
+	
+	@RequestMapping("/usr/member/profile")
+	public String showProfile(Model model) {
+		
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		
+		model.addAttribute("member", member);
+		
+		return "usr/member/profile";
+	}
+	
+	@RequestMapping("/usr/member/modifyMember")
+	public String modifyMember(Model model) {
+		
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		
+		model.addAttribute("member", member);
+		
+		return "usr/member/modifyMember";
+	}
+	
+	@RequestMapping("/usr/member/doModifyMember")
+	@ResponseBody
+	public String doModifyMember(String nickname, String cellphoneNum, String email) {
+		
+		memberService.modifyMember(rq.getLoginedMemberId(), nickname, cellphoneNum, email);
+		
+		return Util.jsReplace(Util.f("%d번 회원의 정보를 수정하였습니다.", rq.getLoginedMemberId()), "profile");
 	}
 	
 	

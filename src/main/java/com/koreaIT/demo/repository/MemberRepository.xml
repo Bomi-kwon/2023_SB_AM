@@ -35,4 +35,21 @@
 		SELECT * FROM `member` WHERE `name` = #{name} AND email = #{email}
 	</select>
 	
+	<update id="modifyMember">
+		UPDATE `member` 
+		<set>
+			updateDate = NOW(),
+			<if test="nickname != null and nickname != ''">
+				nickname = #{nickname}, 
+			</if> 
+			<if test="cellphoneNum != null and cellphoneNum != ''">
+				cellphoneNum = #{cellphoneNum},
+			</if>
+			<if test="email != null and email != ''">
+				email = #{email}
+			</if>
+		</set>
+			WHERE id = #{id}
+	</update>
+	
 </mapper>

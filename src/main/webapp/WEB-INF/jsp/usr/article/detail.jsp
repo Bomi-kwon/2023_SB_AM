@@ -38,6 +38,10 @@
 							<div class="overflow-y-auto">${article.body }</div>
 						</td>
 					</tr>
+					<tr>
+						<th>조회수</th>
+						<td>${article.hit }</td>
+					</tr>
 				</table>
 			</div>
 			

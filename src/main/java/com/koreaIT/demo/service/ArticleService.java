@@ -80,6 +80,10 @@ public class ArticleService {
 		return articleRepository.getNumberOfArticles(boardId, keyWordType, keyWord);
 	}
 
+	public void increaseHit(int id, int hit) {
+		articleRepository.increaseHit(id, hit);
+	}
+
 
 	
 }

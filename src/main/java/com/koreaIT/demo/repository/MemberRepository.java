@@ -18,4 +18,6 @@ public interface MemberRepository {
 	public Member getMemberByNickname(String nickname);
 
 	public Member getoctopusMember(String name, String email);
+
+	public void modifyMember(int id, String nickname, String cellphoneNum, String email);
 }
