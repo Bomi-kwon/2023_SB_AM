@@ -4,6 +4,21 @@
 <c:set var="pageTitle" value="Detail" />
 <%@ include file="../common/head.jsp" %>
 
+<script>
+	const params = {};
+	params.id = parseInt('${param.id}');
+	
+	function ArticleDetail_increaseHit() {
+		$.get('doIncreaseHit', {
+			id : params.id
+		}, function(data){
+			$('#articleDetail_increaseHit').empty().html(data.data1);
+		}, 'json')
+	}
+	
+	ArticleDetail_increaseHit();
+</script>
+
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
 			<div class="table-box-type-1">
@@ -40,7 +55,7 @@
 					</tr>
 					<tr>
 						<th>조회수</th>
-						<td>${article.hit }</td>
+						<td><span class="badge" id="articleDetail_increaseHit">${article.hit }</span></td>
 					</tr>
 				</table>
 			</div>

@@ -96,12 +96,6 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(int id, Model model) {
 		
-		ResultData<Integer> increseHitRd = articleService.increaseHit(id);
-		
-		if(increseHitRd.isFail()) {
-			return rq.jsReturnOnView(increseHitRd.getMsg(), true);
-		}
-		
 		Article article = articleService.getForPrintArticle(id);
 		
 		articleService.actorCanChangeData(rq.getLoginedMemberId(), article);
@@ -109,6 +103,25 @@ public class UsrArticleController {
 		model.addAttribute("article", article);
 		
 		return "usr/article/detail";
+	}
+	
+	@RequestMapping("/usr/article/doIncreaseHit")
+	@ResponseBody
+	public ResultData<Integer> doIncreaseHit(int id) {
+		
+		ResultData<Integer> increaseHitRd = articleService.increaseHit(id);
+		
+		if(increaseHitRd.isFail()) {
+			return increaseHitRd;
+		}
+		
+		int hit = articleService.getArticleHit(id);
+		
+		ResultData<Integer> rd = ResultData.from(increaseHitRd.getResultCode(), increaseHitRd.getMsg(), "hit", hit);
+		
+		rd.setData2("id", id);
+		
+		return rd;
 	}
 	
 	@RequestMapping("/usr/article/modify")
