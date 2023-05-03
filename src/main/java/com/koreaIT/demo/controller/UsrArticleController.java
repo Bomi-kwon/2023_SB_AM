@@ -62,10 +62,6 @@ public class UsrArticleController {
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "title") String keyWordType, 
 			@RequestParam(defaultValue = "") String keyWord) {
 		
-		if(keyWordType!="title" && keyWordType!="body" && keyWordType!="all") {
-			keyWordType = "title";
-		}
-		
 		if(page <= 0) {
 			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다.", true);
 		}

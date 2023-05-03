@@ -5,17 +5,17 @@
 
 <%@ include file="../common/head.jsp" %>
 
-<!--  
-<script type="text/javascript">
-	$('#keyWord').keyup(function (){
-		var $keyWord = $('#keyWord').val();
-		$("#contents:contains('"+$keyWord+"')").each(function(){
-			var regex = new RegExp($keyWord, 'gi');
-			$(this).html( $(this).text().replace(regex, "<span class='text-red'>"+$keyWord+"</span>") );
-		});
-	});
+<script>
+	function highlightKeyword(){
+		var search = $('#keyWord').val();
+		$("#contents:contains('"+ search +"')").each(function(){
+			var regex = new RegExp(search, 'gi');
+			$(this).html( $(this).text().replace(regex, "<span class='text-red'>"+ search +"</span>") );
+		})
+	}
+	
+	highlightKeyword();
 </script>
--->
 
 	<section class="mt-8 mx-auto text-xl">
 		<div class="container mx-auto px-3">

@@ -9,6 +9,15 @@
 	params.id = parseInt('${param.id}');
 	
 	function ArticleDetail_increaseHit() {
+		
+		const localStorageKey = 'article_[' + params.id + ']_alreadyView';
+		
+		if(localStorage.getItem(localStorageKey)) {
+			return;
+		}
+		
+		localStorage.setItem(localStorageKey, true);
+		
 		$.get('doIncreaseHit', {
 			id : params.id
 		}, function(data){
@@ -55,13 +64,15 @@
 					</tr>
 					<tr>
 						<th>조회수</th>
-						<td><span class="badge" id="articleDetail_increaseHit">${article.hit }</span></td>
+						<td>
+						<span class="badge" id="articleDetail_increaseHit">${article.hit }</span>
+						</td>
 					</tr>
 				</table>
 			</div>
 			
 			<div class="btns flex justify-end">
-				<a class="btn-text-link btn btn-outline btn-success" href="list">목록</a>
+				<a class="btn-text-link btn btn-outline btn-success" href="list?boardId=${article.boardId }">목록</a>
 					<c:if test="${article.actorCanChangeData}">
 						<a class="btn-text-link btn btn-outline btn-success" href="modify?id=${article.id }">수정</a>
 						<a class="btn-text-link btn btn-outline btn-success" href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;">삭제</a>
