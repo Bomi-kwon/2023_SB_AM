@@ -27,6 +27,4 @@ public interface ArticleRepository {
 
 	public int increaseHit(int id);
 
-	public int getArticleHit(int id);
-
 }
