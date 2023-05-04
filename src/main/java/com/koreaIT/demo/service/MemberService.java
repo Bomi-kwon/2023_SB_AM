@@ -64,5 +64,9 @@ public class MemberService {
 		memberRepository.modifyMember(id, nickname, cellphoneNum, email);
 	}
 
+	public void dropMember(int id) {
+		memberRepository.dropMember(id);
+	}
+
 	
 }

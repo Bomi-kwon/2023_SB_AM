@@ -27,4 +27,6 @@ public interface ArticleRepository {
 
 	public int increaseHit(int id);
 
+	public int getMyArticlesCnt(int memberId);
+
 }

@@ -112,14 +112,14 @@ public class UsrArticleController {
 				articleService.increaseHit(id);
 				oldCookie.setValue(oldCookie.getValue() + "_[" + id + "]");
 				oldCookie.setPath("/");
-				oldCookie.setMaxAge(30 * 60);
+				oldCookie.setMaxAge(10);
 				resp.addCookie(oldCookie);
 			}
 		} else {
 			articleService.increaseHit(id);
 			Cookie newCookie = new Cookie("hitCount", "[" + id + "]");
 			newCookie.setPath("/");
-			newCookie.setMaxAge(30 * 60);
+			newCookie.setMaxAge(10);
 			resp.addCookie(newCookie);
 		}
 		

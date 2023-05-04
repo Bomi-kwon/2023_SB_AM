@@ -20,4 +20,6 @@ public interface MemberRepository {
 	public Member getoctopusMember(String name, String email);
 
 	public void modifyMember(int id, String nickname, String cellphoneNum, String email);
+
+	public void dropMember(int id);
 }

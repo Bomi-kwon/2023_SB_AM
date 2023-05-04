@@ -42,6 +42,7 @@
 						<col width="300"/>
 						<col width="200"/>
 						<col width="100"/>
+						<col width="100"/>
 					</colgroup>
 					<thead>
 						<tr>
@@ -50,6 +51,7 @@
 							<th>날짜</th>
 							<th>작성자</th>
 							<th>조회수</th>
+							<th>추천수</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,6 +62,7 @@
 								<td>${article.regDate.substring(2,16) }</td>
 								<td>${article.writerName }</td>
 								<td>${article.hit }</td>
+								<td>${article.sumReactionPoint }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

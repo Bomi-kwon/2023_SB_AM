@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.MemberService;
 import com.koreaIT.demo.util.Util;
-import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.Member;
 import com.koreaIT.demo.vo.ResultData;
 import com.koreaIT.demo.vo.Rq;
@@ -68,7 +67,7 @@ public class UsrMemberController {
 			return Util.jsHistoryBack(doJoinRd.getMsg());
 		}
 		
-		return Util.jsReplace(doJoinRd.getMsg(), "/");
+		return Util.jsReplace(doJoinRd.getMsg(), "login");
 	}
 	
 	@RequestMapping("/usr/member/login")
@@ -95,7 +94,7 @@ public class UsrMemberController {
 		Member member = memberService.getMemberByLoginID(loginID);
 		
 		if (member == null) {
-			return Util.jsHistoryBack(Util.f("%s는 존재하지 않는 아이디입니다."));
+			return Util.jsHistoryBack(Util.f("%s는 존재하지 않는 아이디입니다.",loginID));
 		}
 		
 		if (!member.getLoginPW().equals(loginPW)) {
@@ -147,6 +146,18 @@ public class UsrMemberController {
 		memberService.modifyMember(rq.getLoginedMemberId(), nickname, cellphoneNum, email);
 		
 		return Util.jsReplace(Util.f("%d번 회원의 정보를 수정하였습니다.", rq.getLoginedMemberId()), "profile");
+	}
+	
+	@RequestMapping("/usr/member/dropMember")
+	@ResponseBody
+	public String dropMember(int id) {
+		
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		
+		rq.logout();
+		memberService.dropMember(id);
+		
+		return Util.jsReplace(Util.f("%s 회원님, 탈퇴하였습니다.", member.getName()), "/usr/home/main");
 	}
 	
 	

@@ -14,6 +14,10 @@ CREATE TABLE article(
 	`body` TEXT NOT NULL
 );
 
+# article 테이블 컬럼 추가
+ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL DEFAULT 0;
+
+
 # member 테이블 생성
 CREATE TABLE `member`(
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -41,10 +45,25 @@ CREATE TABLE board (
 	delData DATETIME COMMENT '삭제 날짜'
 );
 
+#reactionPoint 테이블 삭제
+DROP TABLE reactionPoint;
+
+#reactionPoint 테이블 생성
+CREATE TABLE reactionPoint(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	memberId INT UNSIGNED NOT NULL,
+	relTypecode VARCHAR(20) NOT NULL COMMENT 'article(게시물), reply(댓글), ...',
+	relId INT UNSIGNED NOT NULL COMMENT '데이터의 번호',
+	`point` SMALLINT NOT NULL DEFAULT 0 COMMENT '좋아요(+1), 싫어요(-1)'
+);
+
 # 테이블 구조 확인
 DESC article;
 DESC `member`;
 DESC board;
+DESC reactionPoint;
 
 # article 테스트 데이터
 INSERT INTO article
@@ -118,6 +137,32 @@ updateDate = NOW(),
 `code` = 'free',
 `name` = '자유';
 
+# reactionPoint 테스트 데이터
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypecode = 'article',
+relId = 14323,
+`point` = 1;
+
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypecode = 'article',
+relId = 14324,
+`point` = 1;
+
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypecode = 'article',
+relId = 114673,
+`point` = -1;
+
+
 
 # 데이터 갯수 곱하기 2배씩 자유게시판에 쓰기
 INSERT INTO article(regDate, updateDate, memberId, boardId, title, `body`)
@@ -139,6 +184,9 @@ ORDER BY id DESC;
 SELECT * FROM board
 ORDER BY id DESC;
 
+SELECT * FROM reactionPoint
+ORDER BY id DESC;
+
 UPDATE article
 SET boardId = 2
 WHERE memberId != 1;
@@ -147,3 +195,10 @@ SELECT COUNT(*)
 FROM article
 WHERE boardId = 1
 
+UPDATE article
+SET hit = FLOOR(RAND()*100)
+WHERE hit = 0;
+
+UPDATE article
+SET hit = hit + 1
+WHERE id = 114673;

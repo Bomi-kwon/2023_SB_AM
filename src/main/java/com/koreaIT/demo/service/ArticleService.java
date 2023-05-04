@@ -81,14 +81,11 @@ public class ArticleService {
 	}
 
 	public void increaseHit(int id) {
-		
-//		int affectedRowsCount = articleRepository.increaseHit(id);
-//		
-//		if(affectedRowsCount == 0) {
-//			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다.");
-//		}
-		
 		articleRepository.increaseHit(id);
+	}
+
+	public int getMyArticlesCnt(int memberId) {
+		return articleRepository.getMyArticlesCnt(memberId);
 	}
 
 }

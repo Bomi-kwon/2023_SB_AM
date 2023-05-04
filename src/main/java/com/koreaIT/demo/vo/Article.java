@@ -18,4 +18,9 @@ public class Article {
 	private String writerName;
 	private boolean actorCanChangeData;
 	private int hit;
+	
+	private int sumReactionPoint;
+	private int likeReactionPoint;
+	private int hateReactionPoint;
+	
 }
