@@ -157,12 +157,18 @@ relId = 14324,
 INSERT INTO reactionPoint
 SET regDate = NOW(),
 updateDate = NOW(),
+memberId = 1,
+relTypecode = 'article',
+relId = 14324,
+`point` = -1;
+
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
 memberId = 3,
 relTypecode = 'article',
 relId = 114673,
 `point` = -1;
-
-
 
 # 데이터 갯수 곱하기 2배씩 자유게시판에 쓰기
 INSERT INTO article(regDate, updateDate, memberId, boardId, title, `body`)
@@ -188,17 +194,57 @@ SELECT * FROM reactionPoint
 ORDER BY id DESC;
 
 UPDATE article
-SET boardId = 2
-WHERE memberId != 1;
-
-SELECT COUNT(*)
-FROM article
-WHERE boardId = 1
-
-UPDATE article
 SET hit = FLOOR(RAND()*100)
 WHERE hit = 0;
 
-UPDATE article
-SET hit = hit + 1
-WHERE id = 114673;
+#다중조인 이용해보기
+SELECT A.*
+	, M.name AS writerName
+	, IFNULL(SUM(R.point), 0) AS sumReactionPoint
+	, IFNULL(SUM(IF(R.point > 0, R.point, 0)),0) AS likeReactionPoint
+	, IFNULL(SUM(IF(R.point < 0, R.point, 0)),0) AS hateReactionPoint
+		FROM article AS A
+		INNER JOIN `member` AS M
+		ON A.memberId = M.id
+		LEFT JOIN reactionPoint AS R
+		ON R.relTypecode = 'article'
+	    AND A.id = R.relId
+		GROUP BY A.id
+		ORDER BY A.id DESC;
+		
+#서브쿼리 이용해보기!!
+SELECT AM.*
+		, IFNULL(SUM(R.point), 0) AS sumReactionPoint
+		, IFNULL(SUM(IF(R.point > 0, R.point, 0)),0) AS likeReactionPoint
+		, IFNULL(SUM(IF(R.point < 0, R.point, 0)),0) AS hateReactionPoint
+	FROM(
+		SELECT A.*, M.name AS writerName
+		FROM article AS A
+		INNER JOIN `member` AS M
+		ON A.memberId = M.id
+		WHERE boardId = 2	
+	) AS AM
+	LEFT JOIN reactionPoint AS R
+	ON R.relTypeCode = 'article'
+	AND R.relId = AM.id
+	GROUP BY AM.id
+	ORDER BY AM.id DESC;
+
+
+#WITH AS 사용해보기!!!
+WITH AM AS(
+	SELECT A.*, M.name AS writerName
+	FROM article AS A
+	INNER JOIN `member` AS M
+	ON A.memberId = M.id
+)
+SELECT AM.*
+		, IFNULL(SUM(R.point), 0) AS sumReactionPoint
+		, IFNULL(SUM(IF(R.point > 0, R.point, 0)),0) AS likeReactionPoint
+		, IFNULL(SUM(IF(R.point < 0, R.point, 0)),0) AS hateReactionPoint
+		FROM AM
+		LEFT JOIN reactionPoint AS R
+		ON R.relTypeCode = 'article'
+		AND R.relId = AM.id
+		GROUP BY AM.id
+		ORDER BY AM.id DESC;
