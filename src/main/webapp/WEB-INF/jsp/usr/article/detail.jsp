@@ -11,12 +11,13 @@
 				relId : ${article.id},
 				relTypeCode : 'article'
 			}, function(data) {
-				console.log(data.data1.sumReactionPoint);
 				if(data.data1.sumReactionPoint > 0) {
 					$('#likepoint').removeClass( 'btn-outline' );
+					$('#likepoint').prop('href','../reactionPoint/doDeleteReactionPoint?relTypeCode=article&relId=${article.id }&point=1');
 				}
 				else if(data.data1.sumReactionPoint < 0) {
 					$('#hatepoint').removeClass( 'btn-outline' );
+					$('#hatepoint').prop('href','../reactionPoint/doDeleteReactionPoint?relTypeCode=article&relId=${article.id }&point=-1');
 				}
 				
 			}, 'json');

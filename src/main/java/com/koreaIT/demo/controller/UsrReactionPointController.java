@@ -37,6 +37,7 @@ public class UsrReactionPointController {
 	@ResponseBody
 	public String doChangeReactionPoint(String relTypeCode, int relId, int point) {
 
+		reactionPointService.doDeleteReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
 		reactionPointService.doChangeReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId, point);
 		
 		if(point == 1) {
@@ -44,6 +45,21 @@ public class UsrReactionPointController {
 		}
 		else {
 			return Util.jsReplace(Util.f("%d번 글에 싫어요를 눌렀습니다.", relId), Util.f("../article/detail?id=%d", relId));
+		}
+
+	}
+	
+	@RequestMapping("/usr/reactionPoint/doDeleteReactionPoint")
+	@ResponseBody
+	public String doDeleteReactionPoint(String relTypeCode, int relId, int point) {
+
+		reactionPointService.doDeleteReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
+		
+		if(point == 1) {
+			return Util.jsReplace(Util.f("%d번 글에 좋아요를 취소합니다", relId), Util.f("../article/detail?id=%d", relId));
+		}
+		else {
+			return Util.jsReplace(Util.f("%d번 글에 싫어요를 취소합니다", relId), Util.f("../article/detail?id=%d", relId));
 		}
 
 	}
