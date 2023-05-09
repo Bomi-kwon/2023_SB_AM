@@ -28,7 +28,6 @@ public class UsrReactionPointController {
 	public ResultData<ReactionPoint> getReactionPoint(int relId, String relTypeCode) {
 
 		ReactionPoint reactionPoint = reactionPointService.getReactionPoint(rq.getLoginedMemberId(), relId, relTypeCode);
-
 		
 		return ResultData.from("S-1", "리액션 정보 조회 성공", "reactionPoint", reactionPoint);
 	}

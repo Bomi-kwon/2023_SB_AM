@@ -40,4 +40,17 @@ public interface ReactionPointRepository {
 			""")
 	void doDeleteReactionPoint(int loginedMemberId, String relTypeCode, int relId);
 
+
+	@Select("""
+			SELECT SUM(R.point)
+			FROM reactionPoint AS R
+			INNER JOIN article AS A
+			ON A.id = R.relId
+			AND R.relTypeCode = 'article'
+			AND R.point = 1
+			WHERE A.memberId = #{loginedMemberId}
+			GROUP BY A.memberId
+			""")
+	int getMyLikesCnt(int loginedMemberId);
+
 }

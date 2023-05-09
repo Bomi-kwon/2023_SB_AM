@@ -89,6 +89,12 @@
 							<th align="right">이메일</th>
 							<td><input class="input input-bordered input-warning w-full" type="text" name="email" placeholder="이메일을 입력해주세요"/></td>
 						</tr>
+						<!-- 
+						<tr>
+							<th align="right">사진</th>
+							<td><input class="input input-bordered input-warning w-full" type="file" name="image"/></td>
+						</tr>
+						 -->
 						<tr>
 							<td colspan="2"><button class="btn btn-outline btn-warning">가입</button></td>
 						</tr>

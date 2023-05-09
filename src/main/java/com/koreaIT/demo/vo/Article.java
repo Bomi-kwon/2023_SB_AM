@@ -18,6 +18,8 @@ public class Article {
 	private String writerName;
 	private boolean actorCanChangeData;
 	private int hit;
+	private int replymemberId;
+	private String replybody;
 	
 	private int sumReactionPoint;
 	private int likeReactionPoint;

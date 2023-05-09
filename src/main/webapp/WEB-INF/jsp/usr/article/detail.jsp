@@ -110,4 +110,41 @@
 		</div>
 	</section>
 	
+	<script>
+		function replyWrite_submitForm(form) {
+			
+			if (form.replybody.value.trim().length < 2) {
+				alert('댓글을 2글자 이상 입력하세요');
+				form.replybody.focus();
+				return;
+			}
+			else {
+				form.submit();
+			}
+		}
+	</script>
+	
+	
+	<section class="mt-8 text-xl">
+		<div class="container mx-auto px-3">
+		<h2>댓글</h2>
+			<form action="../reply/doWriteReply" onsubmit="replyWrite_submitForm(this); return false;">
+				<input type="hidden" name="relTypeCode" value="article"/>
+				<input type="hidden" name="relId" value="${article.id }"/>
+				<div class="mt-4 border border-gray-400 rounded-lg text-base p-4">
+					<div class="mb-2"><span>닉네임</span></div>
+					<textarea class="textarea textarea-bordered w-full" name="replybody" placeholder="댓글을 입력해주세요."></textarea>
+					<div class="flex justify-end"><button class="btn btn-outline btn-sm">댓글 작성</button></div>
+				</div>
+			</form>
+		</div>
+	</section>
+	
+	<c:forEach var="article" items="${articles }">
+		<tr class=hover>
+			<td><div>${article.replymemberId }</div></td>
+			<td><div>${article.replybody }</div></td>
+		</tr>
+	</c:forEach>
+	
 <%@ include file="../common/foot.jsp" %>

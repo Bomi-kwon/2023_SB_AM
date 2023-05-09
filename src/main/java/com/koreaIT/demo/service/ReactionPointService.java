@@ -28,5 +28,9 @@ public class ReactionPointService {
 		reactionPointRepository.doDeleteReactionPoint(loginedMemberId, relTypeCode, relId);
 	}
 
+	public int getMyLikesCnt(int loginedMemberId) {
+		return reactionPointRepository.getMyLikesCnt(loginedMemberId);
+	}
+
 
 }
