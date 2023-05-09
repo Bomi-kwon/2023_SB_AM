@@ -32,3 +32,9 @@ html > body {
 .text-red {
 	color: red;
 }
+.border-top-line {
+	border-top : 1px solid #dfdfdf;
+}
+.border-bottom-line {
+	border-bottom : 1px solid #dfdfdf;
+}

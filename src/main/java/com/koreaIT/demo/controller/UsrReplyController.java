@@ -23,7 +23,7 @@ public class UsrReplyController {
 
 	@RequestMapping("/usr/reply/doWriteReply")
 	@ResponseBody
-	public String doWriteReply(String relTypeCode, String relId, String replybody) {
+	public String doWriteReply(String relTypeCode, int relId, String replybody) {
 		
 		replyService.doWriteReply(rq.getLoginedMemberId(), relTypeCode, relId, replybody);
 		
