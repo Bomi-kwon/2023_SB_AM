@@ -38,3 +38,12 @@ html > body {
 .border-bottom-line {
 	border-bottom : 1px solid #dfdfdf;
 }
+
+html {
+        height: 100vh;
+        min-height: 100vh;
+        background-image: url('https://c.wallhere.com/photos/9a/b3/anime_creatures_SpongeBob_SquarePants_Film_posters-2192947.jpg!d');
+	    background-repeat : no-repeat;
+	    background-attachment : fixed;
+	    background-size : cover;
+      }

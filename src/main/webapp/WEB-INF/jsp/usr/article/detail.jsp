@@ -129,22 +129,45 @@
 		<div class="container mx-auto px-3 ">
 		<h2>댓글</h2>
 			<c:forEach var="reply" items="${replies }">
-			<div class="py-2 border-bottom-line text-base pl-16 border-top-line pt-5">
-				<div class="font-semibold"><span>${reply.writerName }</span></div>
-				<div class="my-1 text-sm"><span>${reply.replybody }</span></div>
-				<div class="text-xs text-gray-400"><span>${reply.updateDate }</span></div>
-			</div>
+				<div class="flex border-top-line">
+					<div class="w-16 object-fill flex items-center">
+						<c:if test="${reply.replymemberId == 1}">
+				        	<img src="https://i.namu.wiki/i/WcCUbrdSA_j2mxAcQwvT3ujxkm5AUHpbGg3YBYHP_u5MXa5vM1cSjfl3NtDXlFLW4BjydHMwI35xn4YJvkYbDA.webp" alt="" />
+				        </c:if>
+				        <c:if test="${reply.replymemberId == 2}">
+				        	<img src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfMzIg/MDAxNTcyMTQzMDk1MzIy.vmE4PCbENLckM1qDsOc0gXKV2R2uyVAIPIsLT-YayKEg.YTzw2hKln4nijfDEp3Y5Y22h5kLsBWkexI9UU6d5XMIg.PNG.yunam69/%EC%8A%A4%ED%8F%B0%EC%A7%80%EB%B0%A5.png?type=w800" alt="" />
+				        </c:if>
+				        <c:if test="${reply.replymemberId == 3}">
+				        	<img src="https://i.namu.wiki/i/Q6BIqhZWqyhBAFmeZoOWIFO2Ttw1X0xOimLTY0WyohXIadIRIoxaAWc6yoggyEKohkI3aDCoKXsBlp6rvL-MFg.webp" alt="" />
+				        </c:if>
+					</div>
+					<div class="py-2 text-base pl-2 pt-5 flex-grow">
+						<div class="font-semibold"><span>${reply.writerName }</span></div>
+						<div class="my-1 text-sm"><span>${reply.replybody }</span></div>
+						<div class="text-xs text-gray-400"><span>${reply.updateDate }</span></div>
+					</div>
+				</div>
 			</c:forEach>
 			
-			<form action="../reply/doWriteReply" onsubmit="replyWrite_submitForm(this); return false;">
-				<input type="hidden" name="relTypeCode" value="article"/>
-				<input type="hidden" name="relId" value="${article.id }"/>
+			<c:if test="${rq.getLoginedMemberId() != 0 }">
+				<form action="../reply/doWriteReply" onsubmit="replyWrite_submitForm(this); return false;">
+					<input type="hidden" name="relTypeCode" value="article"/>
+					<input type="hidden" name="relId" value="${article.id }"/>
+					<div class="mt-4 border border-gray-400 rounded-lg text-base p-4">
+						<div class="mb-2"><span>닉네임</span></div>
+						<textarea class="textarea textarea-bordered w-full" name="replybody" placeholder="댓글을 입력해주세요."></textarea>
+						<div class="flex justify-end"><button class="btn btn-outline btn-sm">댓글 작성</button></div>
+					</div>
+				</form>
+			</c:if>
+			
+			<c:if test="${rq.getLoginedMemberId() == 0 }">
 				<div class="mt-4 border border-gray-400 rounded-lg text-base p-4">
-					<div class="mb-2"><span>닉네임</span></div>
-					<textarea class="textarea textarea-bordered w-full" name="replybody" placeholder="댓글을 입력해주세요."></textarea>
-					<div class="flex justify-end"><button class="btn btn-outline btn-sm">댓글 작성</button></div>
+					<textarea class="textarea textarea-bordered w-full" name="replybody" placeholder="로그인 후 댓글을 입력해주세요."></textarea>
+					<div class="flex justify-end"><a class="btn btn-outline btn-sm" href="../member/login">로그인 하러가기</a></div>
 				</div>
-			</form>
+			</c:if>
+			
 		</div>
 	</section>
 	

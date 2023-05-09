@@ -5,8 +5,8 @@
 <%@ include file="../common/head.jsp" %>
 	
 	<c:if test="${rq.getLoginedMemberId() != 0 }">
-	<div class="flex justify-center">
-	<div class="stats shadow">
+	<div class="flex justify-end mr-40">
+	<div class="stats stats-vertical shadow">
   
 	  <div class="stat">
 	    <div class="stat-figure text-secondary">
@@ -28,8 +28,16 @@
 	  
 	  <div class="stat">
 	    <div class="stat-figure text-secondary">
-	        <div class="w-16 rounded-full">
-	        	<img src="https://i.namu.wiki/i/Q6BIqhZWqyhBAFmeZoOWIFO2Ttw1X0xOimLTY0WyohXIadIRIoxaAWc6yoggyEKohkI3aDCoKXsBlp6rvL-MFg.webp" alt="" />
+	        <div class="w-24 object-fill flex items-center">
+	        	<c:if test="${rq.getLoginedMemberId() == 1}">
+		        	<img src="https://i.namu.wiki/i/WcCUbrdSA_j2mxAcQwvT3ujxkm5AUHpbGg3YBYHP_u5MXa5vM1cSjfl3NtDXlFLW4BjydHMwI35xn4YJvkYbDA.webp" alt="" />
+		        </c:if>
+		        <c:if test="${rq.getLoginedMemberId() == 2}">
+		        	<img src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfMzIg/MDAxNTcyMTQzMDk1MzIy.vmE4PCbENLckM1qDsOc0gXKV2R2uyVAIPIsLT-YayKEg.YTzw2hKln4nijfDEp3Y5Y22h5kLsBWkexI9UU6d5XMIg.PNG.yunam69/%EC%8A%A4%ED%8F%B0%EC%A7%80%EB%B0%A5.png?type=w800" alt="" />
+		        </c:if>
+		        <c:if test="${rq.getLoginedMemberId() == 3}">
+		        	<img src="https://i.namu.wiki/i/Q6BIqhZWqyhBAFmeZoOWIFO2Ttw1X0xOimLTY0WyohXIadIRIoxaAWc6yoggyEKohkI3aDCoKXsBlp6rvL-MFg.webp" alt="" />
+		        </c:if>
 	        </div>
 	    </div>
 	    <div class="stat-value">${member.name }</div>
@@ -41,22 +49,5 @@
 	</div>
 	</c:if>
 	
-	<div>
-		<img src="C:\bbomi\pexels-simon-berger-1323550.jpg" alt="" />
-	</div>
 	
-	<section class="mt-8">
-		<div class="container mx-auto">
-			<div>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus ut voluptates atque quod tempore quaerat non cumque magni nihil eveniet molestiae eius earum ratione! Voluptate error minus magni quibusdam similique.
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea corporis et eligendi sit delectus optio quos distinctio reiciendis at libero illum iure quisquam autem minima iste voluptatibus quidem assumenda consectetur!
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea optio nisi blanditiis eligendi dolores ducimus praesentium consequatur id illum commodi ullam quos autem dicta quis harum reiciendis veniam mollitia pariatur.
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident est vero ipsam libero non atque sed rem quo dolores beatae consequuntur in necessitatibus voluptatem cum magnam quam dolore quisquam odio.
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga nostrum qui quae at dolore est rerum repudiandae cumque expedita id temporibus ab consequuntur veritatis vero in. Atque facere animi autem.
-			</div>
-			<div>
-				안녕하세요
-			</div>
-		</div>
-	</section>
 <%@ include file="../common/foot.jsp" %>

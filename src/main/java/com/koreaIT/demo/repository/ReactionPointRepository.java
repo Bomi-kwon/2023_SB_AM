@@ -42,14 +42,13 @@ public interface ReactionPointRepository {
 
 
 	@Select("""
-			SELECT SUM(R.point)
+			SELECT IFNULL(SUM(R.point),0)
 			FROM reactionPoint AS R
 			INNER JOIN article AS A
 			ON A.id = R.relId
 			AND R.relTypeCode = 'article'
 			AND R.point = 1
 			WHERE A.memberId = #{loginedMemberId}
-			GROUP BY A.memberId
 			""")
 	int getMyLikesCnt(int loginedMemberId);
 

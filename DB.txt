@@ -11,12 +11,9 @@ CREATE TABLE article(
 	memberId INT UNSIGNED NOT NULL,
 	boardId INT UNSIGNED NOT NULL,
 	title VARCHAR(100) NOT NULL,
-	`body` TEXT NOT NULL
+	`body` TEXT NOT NULL,
+	hit INT UNSIGNED NOT NULL DEFAULT 0
 );
-
-# article 테이블 컬럼 추가
-ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL DEFAULT 0;
-
 
 # member 테이블 생성
 CREATE TABLE `member`(
@@ -59,11 +56,24 @@ CREATE TABLE reactionPoint(
 	`point` SMALLINT NOT NULL DEFAULT 0 COMMENT '좋아요(+1), 싫어요(-1)'
 );
 
+#reply 테이블 생성
+CREATE TABLE reply (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	replymemberId INT UNSIGNED NOT NULL,
+	relTypecode VARCHAR(20) NOT NULL COMMENT 'article(게시물), reply(댓글), ...',
+	relId INT UNSIGNED NOT NULL COMMENT '데이터의 번호',
+	replybody TEXT NOT NULL
+);
+
+
 # 테이블 구조 확인
 DESC article;
 DESC `member`;
 DESC board;
 DESC reactionPoint;
+DESC reply;
 
 # article 테스트 데이터
 INSERT INTO article
@@ -143,7 +153,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
 relTypecode = 'article',
-relId = 14323,
+relId = 3,
 `point` = 1;
 
 INSERT INTO reactionPoint
@@ -151,7 +161,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 3,
 relTypecode = 'article',
-relId = 14324,
+relId = 3,
 `point` = 1;
 
 INSERT INTO reactionPoint
@@ -159,16 +169,41 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 relTypecode = 'article',
-relId = 14324,
+relId = 2,
 `point` = -1;
 
 INSERT INTO reactionPoint
 SET regDate = NOW(),
 updateDate = NOW(),
-memberId = 3,
+memberId = 2,
 relTypecode = 'article',
-relId = 114673,
+relId = 2,
 `point` = -1;
+
+# reply 테스트 데이터
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+replymemberId = 2,
+relTypecode = 'article',
+relId = 3,
+replybody = '반갑습니다';
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+replymemberId = 1,
+relTypecode = 'article',
+relId = 3,
+replybody = '안녕하세요';
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+replymemberId = 3,
+relTypecode = 'article',
+relId = 2,
+replybody = '반가워요';
 
 # 데이터 갯수 곱하기 2배씩 자유게시판에 쓰기
 INSERT INTO article(regDate, updateDate, memberId, boardId, title, `body`)
@@ -191,6 +226,9 @@ SELECT * FROM board
 ORDER BY id DESC;
 
 SELECT * FROM reactionPoint
+ORDER BY id DESC;
+
+SELECT * FROM reply
 ORDER BY id DESC;
 
 UPDATE article
@@ -233,10 +271,13 @@ SELECT AM.*
 
 #WITH AS 사용해보기!!!
 WITH AM AS(
-	SELECT A.*, M.name AS writerName
+	SELECT A.*, M.name AS writerName, Re.replymemberId, Re.replybody
 	FROM article AS A
 	INNER JOIN `member` AS M
 	ON A.memberId = M.id
+	LEFT JOIN reply AS Re
+	ON A.id = Re.relId
+	AND Re.relTypeCode = 'article'
 )
 SELECT AM.*
 		, IFNULL(SUM(R.point), 0) AS sumReactionPoint
@@ -248,3 +289,29 @@ SELECT AM.*
 		AND R.relId = AM.id
 		GROUP BY AM.id
 		ORDER BY AM.id DESC;
+
+WITH RE AS (
+	SELECT * FROM reply
+)
+SELECT * FROM RE
+
+WITH RE AS (
+	SELECT * FROM `member`
+)
+SELECT * FROM RE
+
+
+SELECT A.id, Re.replybody, Re.replymemberId
+FROM reply AS Re
+INNER JOIN article AS A
+ON A.id = Re.relId
+AND Re.relTypeCode = 'article'
+WHERE A.id = 3
+
+					
+SELECT R.*, M.nickname AS writerName
+	FROM reply AS R
+	INNER JOIN `member` AS M
+	ON R.replymemberId = M.id
+	WHERE R.relTypeCode = 'article'
+	AND R.relId = 888
