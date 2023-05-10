@@ -26,5 +26,9 @@ public class ReplyService {
 		return replyRepository.getReplies(relTypeCode, relId);
 	}
 
+	public void doDeleteReply(int id) {
+		replyRepository.doDeleteReply(id);
+	}
+
 
 }

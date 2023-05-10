@@ -60,7 +60,7 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<div>${article.getForPrintBody() }</div>
+							<div class="overflow-y-scroll">${article.getForPrintBody() }</div>
 						</td>
 					</tr>
 					<tr>
@@ -125,12 +125,12 @@
 	</script>
 	
 	
-	<section class="mt-8 text-xl mb-5">
+	<section class="my-8 text-xl">
 		<div class="container mx-auto px-3 ">
 		<h2>댓글</h2>
 			<c:forEach var="reply" items="${replies }">
-				<div class="flex border-top-line bg-white bg-opacity-80 mb-1">
-					<div class="w-16 object-fill flex items-center mx-4">
+				<div class="flex border-top-line bg-white bg-opacity-80 mb-1 px-8">
+					<div class="w-16 object-fill flex items-center mr-4">
 						<c:if test="${reply.replymemberId == 1}">
 				        	<img src="https://i.namu.wiki/i/WcCUbrdSA_j2mxAcQwvT3ujxkm5AUHpbGg3YBYHP_u5MXa5vM1cSjfl3NtDXlFLW4BjydHMwI35xn4YJvkYbDA.webp" alt="" />
 				        </c:if>
@@ -142,9 +142,24 @@
 				        </c:if>
 					</div>
 					<div class="py-2 text-base pl-2 pt-5 flex-grow">
-						<div class="font-semibold"><span>${reply.writerName }</span></div>
+						<div class="flex justify-between">
+							<div class="font-semibold flex items-center"><span>${reply.writerName }</span></div>
+							
+							<c:if test="${rq.getLoginedMemberId() == reply.replymemberId }">
+								<div class="dropdown">
+								    <button class="btn btn-square btn-xs btn-ghost">
+								      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
+								    </button>
+								    <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-20">
+								        <li><a>수정</a></li>
+								        <li><a href="../reply/doDeleteReply?id=${reply.id }&relId=${article.id}&replymemberId=${reply.replymemberId}" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;">삭제</a></li>
+								    </ul>
+								</div>
+							</c:if>
+							
+						</div>
 						<div class="my-1 text-sm"><span>${reply.getForPrintReplybody() }</span></div>
-						<div class="text-xs text-gray-400"><span>${reply.updateDate }</span></div>
+						<div class="text-xs text-gray-400 mb-2"><span>${reply.updateDate }</span></div>
 					</div>
 				</div>
 			</c:forEach>

@@ -28,7 +28,21 @@ public class UsrReplyController {
 		
 		replyService.doWriteReply(rq.getLoginedMemberId(), relTypeCode, relId, replybody);
 		
-		
 		return Util.jsReplace(Util.f("%d번 게시물에 댓글을 작성했습니다.", relId), Util.f("../article/detail?id=%d", relId));
 	}
+	
+	@RequestMapping("/usr/reply/doDeleteReply")
+	@ResponseBody
+	public String doDeleteReply(int id, int relId, int replymemberId) {
+		
+		if(replymemberId != rq.getLoginedMemberId()) {
+			return Util.jsReplace(Util.f("%d번 게시물의 댓글 삭제 권한이 없습니다.", relId), Util.f("../article/detail?id=%d", relId));
+		}
+		
+		replyService.doDeleteReply(id);
+		
+		return Util.jsReplace(Util.f("%d번 게시물의 댓글을 삭제했습니다.", relId), Util.f("../article/detail?id=%d", relId));
+	}
+	
+	
 }

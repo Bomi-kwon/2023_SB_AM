@@ -36,7 +36,7 @@ public class Rq {
 		
 		this.httpSession = req.getSession();
 		
-		int loginedMemberId =  0;
+		int loginedMemberId = 0;
 		int loginedMemberAuthlevel =  0;
 		String loginedMemberNickname = null;
 		Member loginedMember = null;
