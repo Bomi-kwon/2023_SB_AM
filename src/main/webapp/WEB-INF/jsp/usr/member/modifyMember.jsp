@@ -53,7 +53,7 @@
 						name="email" value="${member.email }" placeholder="이메일을 입력해주세요."/></td>
 					</tr>
 					<tr>
-						<td colspan="2"><button class="btn btn-outline btn-success">회원정보 수정</button></td>
+						<td colspan="2"><button class="btn btn-success">회원정보 수정</button></td>
 					</tr>
 				</table>
 			</div>
@@ -61,7 +61,7 @@
 		</div>
 	</section>
 			<div class="btns">
-				<button class="btn-text-link btn btn-outline btn-success" type="button" onclick="history.back();">뒤로</button>
+				<button class="btn-text-link btn btn-success" type="button" onclick="history.back();">뒤로</button>
 			</div>
 	
 <%@ include file="../common/foot.jsp" %>

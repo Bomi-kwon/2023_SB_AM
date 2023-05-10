@@ -20,6 +20,7 @@ public class Article {
 	private int hit;
 	private int replymemberId;
 	private String replybody;
+	private int replyCnt;
 	
 	private int sumReactionPoint;
 	private int likeReactionPoint;

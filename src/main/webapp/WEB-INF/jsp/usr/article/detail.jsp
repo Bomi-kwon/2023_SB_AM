@@ -59,8 +59,8 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td>
-							<div class="overflow-y-scroll">${article.getForPrintBody() }</div>
+						<td class="">
+							<div class="detailbody break-all whitespace-normal overflow-y-auto">${article.getForPrintBody() }</div>
 						</td>
 					</tr>
 					<tr>
@@ -101,10 +101,10 @@
 			</div>
 			
 			<div class="btns flex justify-end">
-				<a class="btn-text-link btn btn-outline btn-success" href="list?boardId=${article.boardId }">목록</a>
+				<a class="btn-text-link btn btn-success" href="list?boardId=${article.boardId }">목록</a>
 					<c:if test="${article.actorCanChangeData}">
-						<a class="btn-text-link btn btn-outline btn-success" href="modify?id=${article.id }">수정</a>
-						<a class="btn-text-link btn btn-outline btn-success" href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;">삭제</a>
+						<a class="btn-text-link btn btn-success" href="modify?id=${article.id }">수정</a>
+						<a class="btn-text-link btn btn-success" href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;">삭제</a>
 					</c:if>
 			</div>
 		</div>
@@ -126,10 +126,10 @@
 	
 	
 	<section class="my-8 text-xl">
-		<div class="container mx-auto px-3 ">
+		<div class="container mx-auto px-3">
 		<h2>댓글</h2>
 			<c:forEach var="reply" items="${replies }">
-				<div class="flex border-top-line bg-white bg-opacity-80 mb-1 px-8">
+				<div class="flex border-top-line bg-white bg-opacity-80 mb-1 px-8 container">
 					<div class="w-16 object-fill flex items-center mr-4">
 						<c:if test="${reply.replymemberId == 1}">
 				        	<img src="https://i.namu.wiki/i/WcCUbrdSA_j2mxAcQwvT3ujxkm5AUHpbGg3YBYHP_u5MXa5vM1cSjfl3NtDXlFLW4BjydHMwI35xn4YJvkYbDA.webp" alt="" />
@@ -138,7 +138,7 @@
 				        	<img src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfMzIg/MDAxNTcyMTQzMDk1MzIy.vmE4PCbENLckM1qDsOc0gXKV2R2uyVAIPIsLT-YayKEg.YTzw2hKln4nijfDEp3Y5Y22h5kLsBWkexI9UU6d5XMIg.PNG.yunam69/%EC%8A%A4%ED%8F%B0%EC%A7%80%EB%B0%A5.png?type=w800" alt="" />
 				        </c:if>
 				        <c:if test="${reply.replymemberId == 3}">
-				        	<img src="https://i.namu.wiki/i/Q6BIqhZWqyhBAFmeZoOWIFO2Ttw1X0xOimLTY0WyohXIadIRIoxaAWc6yoggyEKohkI3aDCoKXsBlp6rvL-MFg.webp" alt="" />
+				        	<img class="w-full" src="https://i.namu.wiki/i/Q6BIqhZWqyhBAFmeZoOWIFO2Ttw1X0xOimLTY0WyohXIadIRIoxaAWc6yoggyEKohkI3aDCoKXsBlp6rvL-MFg.webp" alt="" />
 				        </c:if>
 					</div>
 					<div class="py-2 text-base pl-2 pt-5 flex-grow">
@@ -158,7 +158,7 @@
 							</c:if>
 							
 						</div>
-						<div class="my-1 text-sm"><span>${reply.getForPrintReplybody() }</span></div>
+						<div class="detailbody my-1 text-sm break-all whitespace-normal"><span>${reply.getForPrintReplybody() }</span></div>
 						<div class="text-xs text-gray-400 mb-2"><span>${reply.updateDate }</span></div>
 					</div>
 				</div>

@@ -205,15 +205,22 @@ relTypecode = 'article',
 relId = 2,
 replybody = '반가워요';
 
-# 데이터 갯수 곱하기 2배씩 자유게시판에 쓰기
+# 데이터 갯수 곱하기 2배씩 자유게시판에 쓰기(멤버 3명일때)
 INSERT INTO article(regDate, updateDate, memberId, boardId, title, `body`)
 SELECT NOW(), NOW(), FLOOR(RAND()*3) + 1, 2, CONCAT('제목', RAND()), '내용~'
 FROM article;
 
-# 데이터 갯수 곱하기 2배씩 공지사항에 쓰기
+# 데이터 갯수 곱하기 2배씩 공지사항에 쓰기(관리자만 쓰기)
 INSERT INTO article(regDate, updateDate, memberId, boardId, title, `body`)
 SELECT NOW(), NOW(), 1, 1, CONCAT('공지글', RAND()), '내용~'
 FROM article;
+
+# 조회수 무작위로 넣기
+UPDATE article
+SET hit = FLOOR(RAND()*100)
+
+
+SELECT FLOOR(RAND()*1000)
 
 # 데이터 확인
 SELECT * FROM article
@@ -290,28 +297,13 @@ SELECT AM.*
 		GROUP BY AM.id
 		ORDER BY AM.id DESC;
 
-WITH RE AS (
-	SELECT * FROM reply
-)
-SELECT * FROM RE
-
-WITH RE AS (
-	SELECT * FROM `member`
-)
-SELECT * FROM RE
-
-
-SELECT A.id, Re.replybody, Re.replymemberId
-FROM reply AS Re
-INNER JOIN article AS A
-ON A.id = Re.relId
-AND Re.relTypeCode = 'article'
-WHERE A.id = 3
-
-					
-SELECT R.*, M.nickname AS writerName
-	FROM reply AS R
-	INNER JOIN `member` AS M
-	ON R.replymemberId = M.id
-	WHERE R.relTypeCode = 'article'
-	AND R.relId = 888
+SELECT COUNT(*)
+			FROM reply AS R
+			INNER JOIN `member` AS M
+			ON R.replymemberId = M.id
+			WHERE R.relTypeCode = 'article'
+			AND R.relId = 2039
+			ORDER BY R.id DESC
+			
+DELETE FROM reply
+WHERE id = 4

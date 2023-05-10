@@ -58,7 +58,14 @@
 						<c:forEach var="article" items="${articles }">
 							<tr class=hover>
 								<td>${article.id }</td>
-								<td><a class="hover:underline" href="detail?id=${article.id }" id="contents">${article.title }</a></td>
+								<td>
+									<a class="hover:underline" href="detail?id=${article.id }" id="contents">
+										${article.title} 
+										<c:if test="${article.replyCnt != 0 }">
+										(${article.replyCnt })
+										</c:if>
+									</a>
+								</td>
 								<td>${article.regDate.substring(2,16) }</td>
 								<td>${article.writerName }</td>
 								<td>${article.hit }</td>
@@ -72,11 +79,11 @@
 			<div class="mb-2 flex justify-end items-center">
 				<c:if test="${rq.getLoginedMemberId() != 0 }">
 					<c:if test="${board.id != 1 }">
-						<a class="btn-text-link btn btn-outline btn-success" href="write?boardId=${board.id }">글 쓰기</a>
+						<a class="btn-text-link btn btn-success" href="write?boardId=${board.id }">글 쓰기</a>
 					</c:if>
 					<c:if test="${board.id == 1 }">
 						<c:if test="${rq.getLoginedMember().getAuthLevel() == 7 }">
-							<a class="btn-text-link btn btn-outline btn-success" href="write?boardId=${board.id }">글 쓰기</a>
+							<a class="btn-text-link btn btn-success" href="write?boardId=${board.id }">글 쓰기</a>
 						</c:if>
 					</c:if>
 				</c:if>

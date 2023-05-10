@@ -36,13 +36,13 @@
 						<td><textarea class="textarea textarea-success w-full" name="body" placeholder="내용을 입력해주세요." required></textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2"><button class="btn btn-outline btn-success">작성</button></td>
+						<td colspan="2"><button class="btn btn-success">작성</button></td>
 					</tr>
 				</table>
 			</div>
 				</form>
 			<div class="btns flex justify-start">
-				<button class="btn-text-link btn btn-outline btn-success" type="button" onclick="history.back();">뒤로</button>
+				<button class="btn-text-link btn btn-success" type="button" onclick="history.back();">뒤로</button>
 			</div>
 		</div>
 	</section>

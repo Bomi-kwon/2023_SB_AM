@@ -52,10 +52,10 @@
 			</div>
 			
 			<div class="btns flex justify-end">
-				<button class="btn-text-link btn btn-outline btn-success" type="button" onclick="history.back();">뒤로</button>
+				<button class="btn-text-link btn btn-success" type="button" onclick="history.back();">뒤로</button>
 					<c:if test="${member.id == rq.getLoginedMemberId()}">
-						<a class="btn-text-link btn btn-outline btn-success" href="modifyMember?id=${member.id }">회원정보 수정</a>
-						<a class="btn-text-link btn btn-outline btn-success" href="dropMember?id=${member.id }" onclick="if(confirm('정말 탈퇴하시겠습니까?')==false) return false;">회원 탈퇴</a>
+						<a class="btn-text-link btn btn-success" href="modifyMember?id=${member.id }">회원정보 수정</a>
+						<a class="btn-text-link btn btn-success" href="dropMember?id=${member.id }" onclick="if(confirm('정말 탈퇴하시겠습니까?')==false) return false;">회원 탈퇴</a>
 					</c:if>
 			</div>
 		</div>
