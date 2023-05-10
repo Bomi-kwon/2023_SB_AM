@@ -1,5 +1,7 @@
 package com.koreaIT.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +68,10 @@ public class MemberService {
 
 	public void dropMember(int id) {
 		memberRepository.dropMember(id);
+	}
+
+	public List<Member> getMembers() {
+		return memberRepository.getMembers();
 	}
 
 	

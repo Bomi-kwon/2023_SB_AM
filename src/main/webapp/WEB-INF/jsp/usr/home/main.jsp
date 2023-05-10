@@ -41,7 +41,7 @@
 	        </div>
 	    </div>
 	    <div class="stat-value">${member.name }</div>
-	    <br />
+	    <div class="stat-title">가입날짜&nbsp;&nbsp;${member.regDate.substring(0,10) }</div>
 	    <div class="stat-title">${member.email }</div>
 	  </div>
   

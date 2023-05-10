@@ -1,5 +1,7 @@
 package com.koreaIT.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.MemberService;
 import com.koreaIT.demo.util.Util;
+import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.Member;
 import com.koreaIT.demo.vo.ResultData;
 import com.koreaIT.demo.vo.Rq;
@@ -160,5 +163,14 @@ public class UsrMemberController {
 		return Util.jsReplace(Util.f("%s 회원님, 탈퇴하였습니다.", member.getName()), "/usr/home/main");
 	}
 	
+	@RequestMapping("/usr/member/memberlist")
+	public String memberlist(Model model) {
+		
+		List<Member> members = memberService.getMembers();
+		
+		model.addAttribute("members",members);
+		
+		return "usr/member/memberlist";
+	}
 	
 }
