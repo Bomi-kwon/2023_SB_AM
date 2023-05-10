@@ -30,7 +30,6 @@ public interface ReplyRepository {
 			ON R.replymemberId = M.id
 			WHERE R.relTypeCode = #{relTypeCode}
 			AND R.relId = #{relId}
-			ORDER BY R.id DESC
 			""")
 	List<Reply> getReplies(String relTypeCode, int relId);
 

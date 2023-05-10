@@ -24,6 +24,8 @@ public class Rq {
 	private int loginedMemberAuthlevel;
 	@Getter
 	private String loginedMemberNickname;
+	@Getter
+	private Member loginedMember;
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession httpSession;
@@ -37,16 +39,19 @@ public class Rq {
 		int loginedMemberId =  0;
 		int loginedMemberAuthlevel =  0;
 		String loginedMemberNickname = null;
+		Member loginedMember = null;
 		
 		if (httpSession.getAttribute("loginedMemberId") != null) {
 			loginedMemberId = (int)httpSession.getAttribute("loginedMemberId");
 			loginedMemberAuthlevel = (int)httpSession.getAttribute("loginedMemberAuthlevel");
 			loginedMemberNickname = (String)httpSession.getAttribute("loginedMemberNickname");
+			loginedMember = (Member)httpSession.getAttribute("loginedMember");
 		}
 		
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMemberAuthlevel = loginedMemberAuthlevel;
 		this.loginedMemberNickname = loginedMemberNickname;
+		this.loginedMember = loginedMember;
 		
 		this.req.setAttribute("rq", this);
 	}
@@ -77,12 +82,14 @@ public class Rq {
 		httpSession.setAttribute("loginedMemberId", member.getId());
 		httpSession.setAttribute("loginedMemberAuthlevel", member.getAuthLevel());
 		httpSession.setAttribute("loginedMemberNickname", member.getNickname());
+		httpSession.setAttribute("loginedMember", member);
 	}
 
 	public void logout() {
 		httpSession.removeAttribute("loginedMemberId");
 		httpSession.removeAttribute("loginedMemberAuthlevel");
 		httpSession.removeAttribute("loginedMemberNickname");
+		httpSession.removeAttribute("loginedMember");
 	}
 
 	public String jsReturnOnView(String msg, boolean isHistoryBack) {

@@ -28,6 +28,7 @@ public class UsrReplyController {
 		
 		replyService.doWriteReply(rq.getLoginedMemberId(), relTypeCode, relId, replybody);
 		
+		
 		return Util.jsReplace(Util.f("%d번 게시물에 댓글을 작성했습니다.", relId), Util.f("../article/detail?id=%d", relId));
 	}
 }

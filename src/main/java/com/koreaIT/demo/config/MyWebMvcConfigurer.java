@@ -24,13 +24,15 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer{
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/resource/**");
+		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").addPathPatterns("/favicon.ico").excludePathPatterns("/resource/**");
 		
 		registry.addInterceptor(needLoginInterceptor).addPathPatterns("/usr/article/write")
 		.addPathPatterns("/usr/article/doWrite").addPathPatterns("/usr/article/doDelete")
 		.addPathPatterns("/usr/article/modify").addPathPatterns("/usr/article/doModify")
-		.addPathPatterns("/usr/member/doLogout").addPathPatterns("/usr/member/profile");
-		
+		.addPathPatterns("/usr/member/doLogout").addPathPatterns("/usr/member/profile")
+		.addPathPatterns("/usr/reactionPoint/doChangeReactionPoint")
+		.addPathPatterns("/usr/reactionPoint/doDeleteReactionPoint")
+		.addPathPatterns("/usr/reply/doWriteReply");
 		
 		registry.addInterceptor(dontNeedLoginInterceptor).addPathPatterns("/usr/member/doLogin")
 		.addPathPatterns("/usr/member/doJoin");

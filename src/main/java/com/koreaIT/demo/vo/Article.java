@@ -25,4 +25,9 @@ public class Article {
 	private int likeReactionPoint;
 	private int hateReactionPoint;
 	
+	public String getForPrintBody() {
+		
+		return this.body.replaceAll("\n","<br/>" );
+	}
+	
 }
