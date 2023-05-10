@@ -21,6 +21,7 @@ public class UsrReplyController {
 		this.rq = rq;
 	}
 
+	
 	@RequestMapping("/usr/reply/doWriteReply")
 	@ResponseBody
 	public String doWriteReply(String relTypeCode, int relId, String replybody) {

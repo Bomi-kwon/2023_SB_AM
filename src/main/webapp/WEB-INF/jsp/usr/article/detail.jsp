@@ -129,8 +129,8 @@
 		<div class="container mx-auto px-3 ">
 		<h2>댓글</h2>
 			<c:forEach var="reply" items="${replies }">
-				<div class="flex border-top-line">
-					<div class="w-16 object-fill flex items-center">
+				<div class="flex border-top-line bg-white bg-opacity-50 mb-1">
+					<div class="w-16 object-fill flex items-center mx-4">
 						<c:if test="${reply.replymemberId == 1}">
 				        	<img src="https://i.namu.wiki/i/WcCUbrdSA_j2mxAcQwvT3ujxkm5AUHpbGg3YBYHP_u5MXa5vM1cSjfl3NtDXlFLW4BjydHMwI35xn4YJvkYbDA.webp" alt="" />
 				        </c:if>
@@ -153,8 +153,8 @@
 				<form action="../reply/doWriteReply" onsubmit="replyWrite_submitForm(this); return false;">
 					<input type="hidden" name="relTypeCode" value="article"/>
 					<input type="hidden" name="relId" value="${article.id }"/>
-					<div class="mt-4 border border-gray-400 rounded-lg text-base p-4">
-						<div class="mb-2"><span>닉네임</span></div>
+					<div class="mt-4 border border-gray-400 rounded-lg text-base p-4 bg-white bg-opacity-50">
+						<div class="mb-2"><span>${rq.getLoginedMemberNickname() }</span></div>
 						<textarea class="textarea textarea-bordered w-full" name="replybody" placeholder="댓글을 입력해주세요."></textarea>
 						<div class="flex justify-end"><button class="btn btn-outline btn-sm">댓글 작성</button></div>
 					</div>
