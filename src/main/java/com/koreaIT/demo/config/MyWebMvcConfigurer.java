@@ -17,7 +17,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer{
 	private DontNeedLoginInterceptor dontNeedLoginInterceptor;
 
 	@Autowired
-	public MyWebMvcConfigurer(BeforeActionInterceptor beforeActionInterceptor, NeedLoginInterceptor needLoginInterceptor, DontNeedLoginInterceptor dontNeedLoginInterceptor) {
+	public MyWebMvcConfigurer(BeforeActionInterceptor beforeActionInterceptor, NeedLoginInterceptor needLoginInterceptor
+			, DontNeedLoginInterceptor dontNeedLoginInterceptor) {
 		this.beforeActionInterceptor = beforeActionInterceptor;
 		this.needLoginInterceptor = needLoginInterceptor;
 		this.dontNeedLoginInterceptor = dontNeedLoginInterceptor;
@@ -42,6 +43,14 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer{
 		ir.addPathPatterns("/usr/article/doModify");
 		ir.addPathPatterns("/usr/member/doLogout");
 		ir.addPathPatterns("/usr/member/profile");
+		ir.addPathPatterns("/usr/member/checkPassword");
+		ir.addPathPatterns("/usr/member/doCheckPassword");
+		ir.addPathPatterns("/usr/member/modifyMember");
+		ir.addPathPatterns("/usr/member/doModifyMember");
+		ir.addPathPatterns("/usr/member/modifyPassword");
+		ir.addPathPatterns("/usr/member/doModifyPassword");
+		ir.addPathPatterns("/usr/member/dropMember");
+		ir.addPathPatterns("/usr/member/memberlist");
 		ir.addPathPatterns("/usr/reactionPoint/doChangeReactionPoint");
 		ir.addPathPatterns("/usr/reactionPoint/doDeleteReactionPoint");
 		ir.addPathPatterns("/usr/reply/doWriteReply");
@@ -51,8 +60,9 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer{
 		
 		
 		ir = registry.addInterceptor(dontNeedLoginInterceptor);
-		ir.addPathPatterns("/usr/member/doLogin");
 		ir.addPathPatterns("/usr/member/doJoin");
+		ir.addPathPatterns("/usr/member/login");
+		ir.addPathPatterns("/usr/member/doLogin");
 	}
 	
 	

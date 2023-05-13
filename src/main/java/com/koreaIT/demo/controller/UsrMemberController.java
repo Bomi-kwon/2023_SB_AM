@@ -221,6 +221,10 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/memberlist")
 	public String memberlist(Model model) {
 		
+		if(rq.getLoginedMember().getAuthLevel() != 7) {
+			Util.jsHistoryBack("회원목록은 관리자만 볼 수 있습니다.");
+		}
+		
 		List<Member> members = memberService.getMembers();
 		
 		model.addAttribute("members",members);
