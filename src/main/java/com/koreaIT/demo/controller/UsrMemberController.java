@@ -139,7 +139,6 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("/usr/member/doCheckPassword")
-	@ResponseBody
 	public String doCheckPassword(String loginPW) {
 		
 		if (Util.empty(loginPW)) {
@@ -153,13 +152,58 @@ public class UsrMemberController {
 		return "usr/member/modifyMember";
 	}
 	
+	@RequestMapping("/usr/member/modifyMember")
+	public String modifyMember() {
+		
+		return "usr/member/modifyMember";
+	}
+	
 	@RequestMapping("/usr/member/doModifyMember")
 	@ResponseBody
 	public String doModifyMember(String nickname, String cellphoneNum, String email) {
 		
+		if(Util.empty(nickname)) {
+			return Util.jsHistoryBack("닉네임을 입력해주세요.");
+		}
+		
+		if(Util.empty(cellphoneNum)) {
+			return Util.jsHistoryBack("전화번호를 입력해주세요.");
+		}
+		
+		if(Util.empty(email)) {
+			return Util.jsHistoryBack("이메일을 입력해주세요.");
+		}
+		
 		memberService.modifyMember(rq.getLoginedMemberId(), nickname, cellphoneNum, email);
 		
 		return Util.jsReplace(Util.f("%d번 회원의 정보를 수정하였습니다.", rq.getLoginedMemberId()), "profile");
+	}
+	
+	@RequestMapping("/usr/member/modifyPassword")
+	public String modifyPassword() {
+		
+		return "usr/member/modifyPassword";
+	}
+	
+	@RequestMapping("/usr/member/doModifyPassword")
+	@ResponseBody
+	public String doModifyPassword(String loginPW, String loginPWCheck) {
+		
+		if(Util.empty(loginPW)) {
+			return Util.jsHistoryBack("새 비밀번호를 입력해주세요.");
+		}
+		
+		if(Util.empty(loginPWCheck)) {
+			return Util.jsHistoryBack("새 비밀번호 확인을 입력해주세요.");
+		}
+		
+		if(!loginPW.equals(loginPWCheck)) {
+			return Util.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+		}
+		
+		memberService.doModifyPassword(rq.getLoginedMemberId(), loginPW);
+		
+		return Util.jsReplace(Util.f("%d번 회원의 비밀번호를 수정하였습니다.", rq.getLoginedMemberId()), "profile");
 	}
 	
 	@RequestMapping("/usr/member/dropMember")
@@ -178,8 +222,6 @@ public class UsrMemberController {
 	public String memberlist(Model model) {
 		
 		List<Member> members = memberService.getMembers();
-		
-		
 		
 		model.addAttribute("members",members);
 		

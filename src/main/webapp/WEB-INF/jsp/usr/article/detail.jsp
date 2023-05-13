@@ -230,7 +230,7 @@
 					<input type="hidden" name="relTypeCode" value="article"/>
 					<input type="hidden" name="relId" value="${article.id }"/>
 					<div class="my-4 border border-gray-400 rounded-lg text-base p-4 bg-white bg-opacity-80">
-						<div class="mb-2"><span>${rq.getLoginedMemberNickname() }</span></div>
+						<div class="mb-2"><span>${rq.getLoginedMember().getNickname() }</span></div>
 						<textarea class="textarea textarea-bordered w-full" name="replybody" placeholder="댓글을 입력해주세요."></textarea>
 						<div class="flex justify-end"><button class="btn btn-outline btn-sm">댓글 작성</button></div>
 					</div>

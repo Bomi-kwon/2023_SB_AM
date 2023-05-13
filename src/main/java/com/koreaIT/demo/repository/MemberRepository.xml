@@ -37,19 +37,18 @@
 	
 	<update id="modifyMember">
 		UPDATE `member` 
-		<set>
-			updateDate = NOW(),
-			<if test="nickname != null and nickname != ''">
+			SET updateDate = NOW(),
 				nickname = #{nickname}, 
-			</if> 
-			<if test="cellphoneNum != null and cellphoneNum != ''">
 				cellphoneNum = #{cellphoneNum},
-			</if>
-			<if test="email != null and email != ''">
 				email = #{email}
-			</if>
-		</set>
 			WHERE id = #{id}
+	</update>
+	
+	<update id="doModifyPassword">
+		UPDATE `member` 
+			SET updateDate = NOW(),
+				loginPW = #{loginPW}
+				WHERE id = #{loginedMemberId}
 	</update>
 	
 	<delete id="dropMember">

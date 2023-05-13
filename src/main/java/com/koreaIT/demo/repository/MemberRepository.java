@@ -26,4 +26,6 @@ public interface MemberRepository {
 	public void dropMember(int id);
 
 	public List<Member> getMembers();
+
+	public void doModifyPassword(int loginedMemberId, String loginPW);
 }
