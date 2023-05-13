@@ -132,12 +132,23 @@ public class UsrMemberController {
 		return "usr/member/profile";
 	}
 	
-	@RequestMapping("/usr/member/modifyMember")
-	public String modifyMember(Model model) {
+	@RequestMapping("/usr/member/checkPassword")
+	public String doCheckPassword(Model model) {
 		
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		return "usr/member/checkPassword";
+	}
+	
+	@RequestMapping("/usr/member/doCheckPassword")
+	@ResponseBody
+	public String doCheckPassword(String loginPW) {
 		
-		model.addAttribute("member", member);
+		if (Util.empty(loginPW)) {
+			return rq.jsReturnOnView("비밀번호를 입력해주세요", true);
+		}
+
+		if (rq.getLoginedMember().getLoginPW().equals(loginPW) == false) {
+			return rq.jsReturnOnView("비밀번호가 일치하지 않습니다", true);
+		}
 		
 		return "usr/member/modifyMember";
 	}
@@ -167,6 +178,8 @@ public class UsrMemberController {
 	public String memberlist(Model model) {
 		
 		List<Member> members = memberService.getMembers();
+		
+		
 		
 		model.addAttribute("members",members);
 		

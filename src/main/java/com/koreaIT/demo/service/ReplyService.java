@@ -30,5 +30,13 @@ public class ReplyService {
 		replyRepository.doDeleteReply(id);
 	}
 
+	public Reply getReply(int id) {
+		return replyRepository.getReply(id);
+	}
+
+	public void doModifyReply(int id, String replybody) {
+		replyRepository.doModifyReply(id, replybody);
+	}
+
 
 }

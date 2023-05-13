@@ -5,6 +5,8 @@
 
 <%@ include file="../common/head.jsp" %>
 
+<!-- 검색어 하이라이트 기능 시도했는데 미완성 -->
+<!-- 
 <script>
 	function highlightKeyword(){
 		var search = $('#keyWord').val();
@@ -13,9 +15,9 @@
 			$(this).html( $(this).text().replace(regex, "<span class='text-red'>"+ search +"</span>") );
 		})
 	}
-	
 	highlightKeyword();
 </script>
+ -->
 
 	<section class="mt-8 mx-auto text-xl">
 		<div class="container mx-auto px-3">

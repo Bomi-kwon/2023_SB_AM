@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.koreaIT.demo.vo.Reply;
 
@@ -21,7 +22,7 @@ public interface ReplyRepository {
 			relId = #{relId},
 			replybody = #{replybody};
 			""")
-	void doWriteReply(int loginedMemberId, String relTypeCode, int relId, String replybody);
+	public void doWriteReply(int loginedMemberId, String relTypeCode, int relId, String replybody);
 
 	
 	@Select("""
@@ -32,13 +33,34 @@ public interface ReplyRepository {
 			WHERE R.relTypeCode = #{relTypeCode}
 			AND R.relId = #{relId}
 			""")
-	List<Reply> getReplies(String relTypeCode, int relId);
+	public List<Reply> getReplies(String relTypeCode, int relId);
 
 
 	@Delete("""
 			DELETE FROM reply
 			WHERE id = #{id}
 			""")
-	void doDeleteReply(int id);
+	public void doDeleteReply(int id);
+
+
+	@Select("""
+			SELECT R.*, M.nickname AS writerName
+			FROM reply AS R
+			INNER JOIN `member` AS M
+			ON R.replymemberId = M.id
+			WHERE R.id = #{id}
+			""")
+	public Reply getReply(int id);
+
+
+	@Update("""
+			UPDATE reply
+			SET updateDate = NOW(),
+			replybody = #{replybody}
+			WHERE id = #{id}
+			""")
+	public void doModifyReply(int id, String replybody);
+	
+	
 
 }
