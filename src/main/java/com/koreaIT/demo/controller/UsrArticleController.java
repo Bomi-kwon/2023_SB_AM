@@ -180,6 +180,8 @@ public class UsrArticleController {
 		
 		Article article = articleService.getArticleById(id);
 		
+		int boardId = article.getBoardId();
+		
 		ResultData actorCanDeleteRd = articleService.actorCanMD(rq.getLoginedMemberId(), article);
 		
 		if(actorCanDeleteRd.isFail()) {
@@ -188,6 +190,6 @@ public class UsrArticleController {
 		
 		articleService.deleteArticle(id);
 		
-		return Util.jsReplace(Util.f("%d번 게시물을 삭제했습니다.", id), "list?boardId=0");
+		return Util.jsReplace(Util.f("%d번 게시물을 삭제했습니다.", id), Util.f("list?boardId=%d", boardId));
 	}
 }

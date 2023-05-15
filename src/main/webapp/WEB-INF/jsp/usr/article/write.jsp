@@ -4,6 +4,7 @@
 <c:set var="pageTitle" value="Write" />
 <%@ include file="../common/head.jsp" %>
 
+
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
 			<form action="doWrite" onsubmit="logincheck(this); return false;">
@@ -33,7 +34,10 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea class="textarea textarea-success w-full" name="body" placeholder="내용을 입력해주세요." required></textarea></td>
+						<td>
+							<div id="editor" class="bg-white"></div>
+							<button id="btn-getHtml">불러오기</button>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="2"><button class="btn btn-success">작성</button></td>
@@ -46,6 +50,58 @@
 			</div>
 		</div>
 	</section>
+	
+	<script>
+		const Editor = toastui.Editor;
+		
+		window.dataStorage = {
+			    _storage: new WeakMap(),
+			    put: function (element, key, obj) {
+			        if (!this._storage.has(element)) {
+			            this._storage.set(element, new Map());
+			        }
+			        this._storage.get(element).set(key, obj);
+			    },
+			    get: function (element, key) {
+			        return this._storage.get(element).get(key);
+			    },
+			    has: function (element, key) {
+			        return this._storage.has(element) && this._storage.get(element).has(key);
+			    },
+			    remove: function (element, key) {
+			        var ret = this._storage.get(element).delete(key);
+			        if (!this._storage.get(element).size === 0) {
+			            this._storage.delete(element);
+			        }
+			        return ret;
+			    }
+			}
+		
+		function Editor__init(){
+			  const editorEl = document.querySelector('#editor');
+			  const editor = new Editor({
+			    el: editorEl,
+			    height: '500px',
+			    initialEditType: 'markdown',
+			    previewStyle: 'tab'
+			  });
+			  
+			  dataStorage.put(editorEl, 'editor', editor);
+			}
+
+
+		const btnGetHtmlEl = document.querySelector('#btn-getHtml');
+
+		btnGetHtmlEl.addEventListener('click', () => {
+		  const editorEl = document.querySelector('#editor');
+		  const editor = dataStorage.get(editorEl, 'editor');
+		  
+		  //얘를 body에 넣어줘야함!!
+		  alert(editor.getMarkdown());
+		})
+
+		Editor__init();
+	</script>
 			
 	
 <%@ include file="../common/foot.jsp" %>
