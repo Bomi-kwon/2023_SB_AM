@@ -7,7 +7,7 @@
 
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
-			<form action="doWrite" onsubmit="logincheck(this); return false;">
+			<form action="doWrite" id="form">
 			<div class="table-box-type-1 overflow-x-auto">
 					<table border="1" class="mx-auto able w-full">
 					<colgroup>
@@ -30,17 +30,17 @@
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input class="input input-bordered input-success w-full" type="text" name="title" placeholder="제목을 입력해주세요." required/></td>
+						<td><input class="input input-bordered input-success w-full" type="text" id="title" 
+						name="title" placeholder="제목을 입력해주세요." required/></td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td>
 							<div id="editor" class="bg-white"></div>
-							<button id="btn-getHtml">불러오기</button>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><button class="btn btn-success">작성</button></td>
+						<td colspan="2"><button id="btn-getHtml" class="btn btn-success" onsubmit="writeeditor();">작성</button></td>
 					</tr>
 				</table>
 			</div>
@@ -83,24 +83,26 @@
 			    el: editorEl,
 			    height: '500px',
 			    initialEditType: 'markdown',
-			    previewStyle: 'tab'
+			    previewStyle: 'tab',
+			    placeholder: '내용을 입력해주세요.'
 			  });
 			  
 			  dataStorage.put(editorEl, 'editor', editor);
 			}
-
+		
+		Editor__init();
 
 		const btnGetHtmlEl = document.querySelector('#btn-getHtml');
 
 		btnGetHtmlEl.addEventListener('click', () => {
 		  const editorEl = document.querySelector('#editor');
 		  const editor = dataStorage.get(editorEl, 'editor');
-		  
-		  //얘를 body에 넣어줘야함!!
-		  alert(editor.getMarkdown());
+		  $('#form').append(`
+					<input type="hidden" name="body" value="` + editor.getMarkdown() + `"/>
+					`);
 		})
-
-		Editor__init();
+		
+		
 	</script>
 			
 	

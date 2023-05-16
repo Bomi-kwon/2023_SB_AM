@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.MemberService;
 import com.koreaIT.demo.util.Util;
-import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.Member;
 import com.koreaIT.demo.vo.ResultData;
 import com.koreaIT.demo.vo.Rq;
@@ -30,6 +29,23 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/join")
 	public String join() {
 		return "usr/member/join";
+	}
+	
+	@RequestMapping("/usr/member/checkLoginID")
+	@ResponseBody
+	public ResultData<String> checkLoginID(String loginID) {
+		
+		if(loginID == null || loginID == "") {
+			return ResultData.from("F-0", "아이디를 입력해주세요.");
+		}
+		
+		Member member = memberService.getMemberByLoginID(loginID);
+		
+		if(member != null) {
+			return ResultData.from("F-1", "이미 존재하는 아이디입니다.");
+		}
+		
+		return ResultData.from("S-1", "멋진 아이디군요!", "loginID", loginID);
 	}
 	
 	@RequestMapping("/usr/member/doJoin")

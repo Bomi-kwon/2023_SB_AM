@@ -171,7 +171,6 @@
 			
 		}
 		
-		
 		function replyModify_cancle(i) {
 			let replyContent = $('#' + i);
 			replyContent.html(originalForm);

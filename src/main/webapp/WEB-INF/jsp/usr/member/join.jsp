@@ -4,57 +4,26 @@
 <c:set var="pageTitle" value="Join" />
 <%@ include file="../common/head.jsp" %>
 
-	<script type="text/javascript">
-		function check(form) {
+	<script>
+		function loginIDDupCheck() {
+			var loginID = $('#loginID').val();
 			
-			if (form.loginID.value.trim().length == 0) {
-				alert('아이디를 입력하세요');
-				form.loginID.focus();
-				return;
-			}
-			else if (form.loginPW.value.trim().length == 0) {
-				alert('비밀번호를 입력하세요');
-				form.loginPW.focus();
-				return;
-			}
-			else if (form.loginPWCheck.value.trim().length == 0) {
-				alert('비밀번호 확인을 입력하세요');
-				form.loginPWCheck.focus();
-				return;
-			}
-			else if(form.name.value.trim().length == 0) {
-				alert('이름을 입력하세요.');
-				form.name.focus();
-				return;
-			}
-			else if(form.nickname.value.trim().length == 0) {
-				alert('닉네임을 입력하세요.');
-				form.nickname.focus();
-				return;
-			}
-			else if(form.cellphoneNum.value.trim().length == 0) {
-				alert('전화번호를 입력하세요.');
-				form.cellphoneNum.focus();
-				return;
-			}
-			else if(form.email.value.trim().length == 0) {
-				alert('이메일을 입력하세요.');
-				form.email.focus();
-				return;
-			}
-			else if(form.loginPW.value != form.loginPWCheck.value) {
-				alert('비밀번호가 일치하지 않습니다.');
-				form.loginPW.value = null;
-				form.loginPWCheck.value = null;
-				form.loginPW.focus();
-				return;
-			}
-			else {
-				form.submit();
-			}
+			$.get('checkLoginID', {
+				loginID : loginID
+			}, function(data) {
+				console.log(data);
+				if(data.fail == true) {
+					$('.loginIDDupCheckMsg').html(data.msg);
+				}
+				if(data.success == true) {
+					$('.loginIDDupCheckMsg').html(data.msg);
+				}
+			}, 'json');
 		}
 	</script>
 	
+
+			
 	
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
@@ -63,7 +32,12 @@
 					<table border="1" class="mx-auto able w-full">
 						<tr>
 							<th align="right">아이디</th>
-							<td><input class="input input-bordered input-warning w-full" type="text" name="loginID" placeholder="아이디를 입력해주세요" autocomplete="on"/>
+							<td>
+								<div>
+									<input onfocusout="loginIDDupCheck()"class="input input-bordered input-warning w-full" type="text" name="loginID" id="loginID" placeholder="아이디를 입력해주세요" autocomplete="on"/>
+									<div class="loginIDDupCheckMsg sm:text-gray-50"></div>
+								</div>
+							</td>
 						</tr>		
 						<tr>
 							<th align="right">비밀번호</th>

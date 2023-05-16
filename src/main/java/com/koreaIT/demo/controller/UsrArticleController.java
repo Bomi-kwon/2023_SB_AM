@@ -19,6 +19,7 @@ import com.koreaIT.demo.service.ReplyService;
 import com.koreaIT.demo.util.Util;
 import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.Board;
+import com.koreaIT.demo.vo.ReactionPoint;
 import com.koreaIT.demo.vo.Reply;
 import com.koreaIT.demo.vo.ResultData;
 import com.koreaIT.demo.vo.Rq;

@@ -36,10 +36,10 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea class="textarea textarea-success w-full" name="body" placeholder="내용을 입력해주세요." >${article.body }</textarea></td>
+						<td><div id="editor" class="bg-white">${article.getForPrintBody() }</div></td>
 					</tr>
 					<tr>
-						<td colspan="2"><button class="btn btn-outline btn-success">수정</button></td>
+						<td colspan="2"><button id="btn-getHtml" class="btn btn-outline btn-success">수정</button></td>
 					</tr>
 				</table>
 			</div>
@@ -49,5 +49,62 @@
 			<div class="btns">
 				<button class="btn-text-link btn btn-outline btn-success" type="button" onclick="history.back();">뒤로</button>
 			</div>
+			
+	<script>
+		const Editor = toastui.Editor;
+		
+		window.dataStorage = {
+			    _storage: new WeakMap(),
+			    put: function (element, key, obj) {
+			        if (!this._storage.has(element)) {
+			            this._storage.set(element, new Map());
+			        }
+			        this._storage.get(element).set(key, obj);
+			    },
+			    get: function (element, key) {
+			        return this._storage.get(element).get(key);
+			    },
+			    has: function (element, key) {
+			        return this._storage.has(element) && this._storage.get(element).has(key);
+			    },
+			    remove: function (element, key) {
+			        var ret = this._storage.get(element).delete(key);
+			        if (!this._storage.get(element).size === 0) {
+			            this._storage.delete(element);
+			        }
+			        return ret;
+			    }
+			}
+		
+		var articlebody = '${article.getForPrintBody()}';
+		console.log(articlebody);
+		
+		function Editor__init(){
+			  const editorEl = document.querySelector('#editor');
+			  const editor = new Editor({
+			    el: editorEl,
+			    height: '500px',
+			    initialEditType: 'markdown',
+			    previewStyle: 'tab'
+			  });
+			  
+			  dataStorage.put(editorEl, 'editor', editor);
+			}
+		
+		Editor__init();
+
+		const btnGetHtmlEl = document.querySelector('#btn-getHtml');
+
+		btnGetHtmlEl.addEventListener('click', () => {
+		  const editorEl = document.querySelector('#editor');
+		  const editor = dataStorage.get(editorEl, 'editor');
+		  
+		  $('#form').append(`
+					<input type="hidden" name="body" value="` + editor.getMarkdown() + `"/>
+					`);
+		})
+		
+		
+	</script>
 	
 <%@ include file="../common/foot.jsp" %>
