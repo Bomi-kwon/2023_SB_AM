@@ -31,6 +31,8 @@
 		
 		
 	</script>
+	
+	<%@ include file="../common/toastUiEditorLib.jsp" %>
 
 <!-- 디테일 페이지 -->
 	<section class="mt-8 text-xl">
@@ -63,8 +65,8 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td class="">
-							<div class="detailbody break-all whitespace-normal overflow-y-auto">${article.getForPrintBody() }</div>
+						<td>
+							<div id="viewer" class="bg-white">${article.getForPrintBody() }</div>
 						</td>
 					</tr>
 					<tr>
@@ -114,6 +116,8 @@
 			</div>
 		</div>
 	</section>
+	
+
 	
 	
 	<!-- 댓글 미입력 방지 -->
@@ -246,5 +250,5 @@
 		</div>
 	</section>
 	
-	
+
 <%@ include file="../common/foot.jsp" %>

@@ -7,7 +7,7 @@
     font-style: normal;
 }
 
-html > body {
+html > body, html > body .ProseMirror, html > body .toastui-editor-contents {
 	font-family: 'Happiness-Sans-Title', sans-serif;
 	text-underline-position:under;
 }
@@ -21,6 +21,11 @@ html > body {
 	padding: 10px;
 	text-align: center;
 	max-width: 500px;
+}
+
+html > body .ProseMirror, html > body .toastui-editor-contents {
+	text-align: left;
+	font-size: 1.25rem;
 }
 
 .btn-text-link {

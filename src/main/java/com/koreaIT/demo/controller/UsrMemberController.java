@@ -35,7 +35,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData<String> checkLoginID(String loginID) {
 		
-		if(loginID == null || loginID == "") {
+		if(Util.empty(loginID)) {
 			return ResultData.from("F-0", "아이디를 입력해주세요.");
 		}
 		
