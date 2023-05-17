@@ -6,7 +6,7 @@
 
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
-			<form action="doModify" onsubmit="logincheck(this); return false;">
+			<form action="doModify" id="form">
 			<div class="table-box-type-1 overflow-x-auto">
 			<input type="hidden" name="id" value="${article.id }"/>
 					<table border="1" class="mx-auto able w-full">
@@ -76,8 +76,6 @@
 			    }
 			}
 		
-		var articlebody = '${article.getForPrintBody()}';
-		console.log(articlebody);
 		
 		function Editor__init(){
 			  const editorEl = document.querySelector('#editor');
@@ -98,7 +96,6 @@
 		btnGetHtmlEl.addEventListener('click', () => {
 		  const editorEl = document.querySelector('#editor');
 		  const editor = dataStorage.get(editorEl, 'editor');
-		  
 		  $('#form').append(`
 					<input type="hidden" name="body" value="` + editor.getMarkdown() + `"/>
 					`);
