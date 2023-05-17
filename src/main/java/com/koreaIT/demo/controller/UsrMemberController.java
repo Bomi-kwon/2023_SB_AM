@@ -42,7 +42,7 @@ public class UsrMemberController {
 		Member member = memberService.getMemberByLoginID(loginID);
 		
 		if(member != null) {
-			return ResultData.from("F-1", "이미 존재하는 아이디입니다.");
+			return ResultData.from("F-1", Util.f("%s은(는) 이미 사용중인 아이디입니다.", member.getLoginID()));
 		}
 		
 		return ResultData.from("S-1", "멋진 아이디군요!", "loginID", loginID);
@@ -52,10 +52,6 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doJoin(String loginID, String loginPW, String name, String nickname, String cellphoneNum, String email) {
 		
-		if ( rq.getLoginedMemberId() != 0) {
-			return Util.jsHistoryBack("로그아웃 후 이용해주세요.");
-		}
-		
 		if(Util.empty(loginID)) {
 			return Util.jsHistoryBack("아이디를 입력해주세요.");
 		}
@@ -63,6 +59,7 @@ public class UsrMemberController {
 		if(Util.empty(loginPW)) {
 			return Util.jsHistoryBack("비밀번호를 입력해주세요.");
 		}
+		
 		
 		if(Util.empty(name)) {
 			return Util.jsHistoryBack("이름을 입력해주세요.");
