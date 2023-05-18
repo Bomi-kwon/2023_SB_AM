@@ -6,3 +6,14 @@ $('select[data-value]').each(function(index, item){
 	}
 })
 
+$('.modal-exam').click(function(){
+	$('.layer-bg, .layer').show();
+})
+
+$('.close-btn').click(function(){
+	$('.layer-bg, .layer').hide();
+})
+
+$('.layer-bg').click(function(){
+	$('.layer-bg, .layer').hide();
+})

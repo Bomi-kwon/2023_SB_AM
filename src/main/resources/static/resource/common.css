@@ -56,3 +56,41 @@ html {
 .detailbody {
 	width: 100%;
 }
+
+.modal-exam {
+	cursor: pointer;
+}
+
+.layer-bg, .layer {
+	display: none;
+}
+
+.layer {
+	position: absolute;
+	height: 500px;
+	width: 500px;
+	background-color: pink;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	color: red;
+	padding: 20px;
+}
+.layer > h1 {
+	font-size: 4rem;
+	margin-bottom: 10px;
+}
+.layer-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+}
+.close-btn {
+	position: absolute;
+	top:20px;
+	right: 20px;
+	cursor: pointer;
+}

@@ -49,5 +49,29 @@
 	</div>
 	</c:if>
 	
+	<section class="my-3 text-xl">
+		<div class="container mx-auto px-3">
+			<div class="modal-exam">모달예시</div>
+		</div>
+	</section>
+	
+	<section class="my-3 text-xl">
+		<div class="container mx-auto px-3">
+			<a href="/usr/home/APITest">APITest</a>
+			<br />
+			<a href="/usr/home/APITest2">APITest2</a>
+		</div>
+	</section>
+	
+	
+	
+	<div class="layer-bg"></div>
+	<div class="layer">
+		<h1>modal</h1>
+		<div class="close-btn"><i class="fa-solid fa-circle-xmark"></i></div>
+		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat eligendi ad odit excepturi cum explicabo nulla esse qui culpa aspernatur. Quia odit enim quod sit asperiores voluptas eos dolor est.</div>
+	</div>
+	
+	
 	
 <%@ include file="../common/foot.jsp" %>
