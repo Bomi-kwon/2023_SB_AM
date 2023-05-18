@@ -51,9 +51,18 @@
 	
 	<section class="my-3 text-xl">
 		<div class="container mx-auto px-3">
-			<div class="modal-exam">모달예시</div>
+			<div class="modal-exam inline-block bg-red-50">모달예시</div>
+			<div class="popup-exam inline-block bg-red-50" onclick="popup();">팝업예시</div>
 		</div>
 	</section>
+	
+	<script>
+		function popup() {
+			var url = "popup";
+            var option = "width = 300, height = 300, top = 100, left = 200, location = no"
+            window.open(url, "", option);
+		}
+	</script>
 	
 	<section class="my-3 text-xl">
 		<div class="container mx-auto px-3">
@@ -69,6 +78,8 @@
 	<div class="layer">
 		<h1>modal</h1>
 		<div class="close-btn"><i class="fa-solid fa-circle-xmark"></i></div>
+		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat eligendi ad odit excepturi cum explicabo nulla esse qui culpa aspernatur. Quia odit enim quod sit asperiores voluptas eos dolor est.</div>
+		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat eligendi ad odit excepturi cum explicabo nulla esse qui culpa aspernatur. Quia odit enim quod sit asperiores voluptas eos dolor est.</div>
 		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat eligendi ad odit excepturi cum explicabo nulla esse qui culpa aspernatur. Quia odit enim quod sit asperiores voluptas eos dolor est.</div>
 	</div>
 	
