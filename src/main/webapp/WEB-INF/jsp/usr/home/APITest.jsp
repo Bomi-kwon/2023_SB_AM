@@ -6,17 +6,21 @@
 
 <script>
 
-	const API_KEY = '';
+	const serviceKey = 'vTraa3XEWke2yjgWCW5BvReLV4uCxVyOrkQ63dm+Z95OXI789pVtYgD2EPlcsmFjOZP8VEQHwq+n02pumTOsjg==';
+	const currentPage = 1;
+	const perPage = 1;
+	const CODE = 533112;
 	
 	async function getData() {
-		const url = '' + API_KEY;
+		const url = 'https://apis.data.go.kr/6430000/realtimeStandbyInfoService/getRealtimeStandbyInfo?surviceKey='+serviceKey+'&currentPage='+currentPage+'&perPage='+perPage+'&CODE='+CODE;
+		
+		console.log(url);
 		
 		const response = await fetch(url);
-		const data = await response.json();
+		
+		const data = JSON.stringify(response);
 		
 		console.log(data);
-		
-		$('.API-content').html();
 	}
 	
 	getData();
