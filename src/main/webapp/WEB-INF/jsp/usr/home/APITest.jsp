@@ -6,7 +6,7 @@
 
 <script>
 
-	const serviceKey = 'vTraa3XEWke2yjgWCW5BvReLV4uCxVyOrkQ63dm+Z95OXI789pVtYgD2EPlcsmFjOZP8VEQHwq+n02pumTOsjg==';
+	const serviceKey = 'vTraa3XEWke2yjgWCW5BvReLV4uCxVyOrkQ63dm%2BZ95OXI789pVtYgD2EPlcsmFjOZP8VEQHwq%2Bn02pumTOsjg%3D%3D';
 	const currentPage = 1;
 	const perPage = 1;
 	const CODE = 533112;
@@ -18,7 +18,9 @@
 		
 		const response = await fetch(url);
 		
-		const data = JSON.stringify(response);
+		console.log(response);
+		
+		const data = await response.json();
 		
 		console.log(data);
 	}
