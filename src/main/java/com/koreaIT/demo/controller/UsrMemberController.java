@@ -245,4 +245,70 @@ public class UsrMemberController {
 		return "usr/member/memberlist";
 	}
 	
+	@RequestMapping("/usr/member/findLoginID")
+	public String findLoginID() {
+		return "usr/member/findLoginID";
+	}
+	
+	@RequestMapping("/usr/member/doFindLoginID")
+	@ResponseBody
+	public String doFindLoginID(String name, String email) {
+		
+		if(Util.empty(name)) {
+			return Util.jsHistoryBack("이름을 입력해주세요.");
+		}
+		
+		if(Util.empty(email)) {
+			return Util.jsHistoryBack("이메일을 입력해주세요.");
+		}
+		
+		Member member = memberService.getoctopusMember(name, email);
+		
+		if(member == null) {
+			return Util.jsHistoryBack("일치하는 회원이 없습니다.");
+		}
+		
+		return Util.jsReplace(Util.f("회원님의 아이디는 %s 입니다.", member.getLoginID()), "login");
+	}
+	
+	@RequestMapping("/usr/member/findLoginPW")
+	public String findLoginPW() {
+		return "usr/member/findLoginPW";
+	}
+	
+	@RequestMapping("/usr/member/doFindLoginPW")
+	@ResponseBody
+	public String doFindLoginPW(String name, String loginID, String email) {
+		
+		if(Util.empty(name)) {
+			return Util.jsHistoryBack("이름을 입력해주세요.");
+		}
+		
+		if(Util.empty(loginID)) {
+			return Util.jsHistoryBack("아이디를 입력해주세요.");
+		}
+		
+		if(Util.empty(email)) {
+			return Util.jsHistoryBack("이메일을 입력해주세요.");
+		}
+		
+		Member member = memberService.getMemberByLoginID(loginID);
+		
+		if(member == null) {
+			return Util.jsHistoryBack("일치하는 회원이 없습니다.");
+		}
+		
+		if(!member.getName().equals(name)) {
+			return Util.jsHistoryBack("이름이 일치하지 않습니다.");
+		}
+		
+		if(!member.getEmail().equals(email)) {
+			return Util.jsHistoryBack("이메일이 일치하지 않습니다.");
+		}
+		
+		ResultData notifyTempLoginPwByEmailRd = memberService.notifyTempLoginPwByEmail(member);
+		
+		return Util.jsReplace(notifyTempLoginPwByEmailRd.getMsg(), "login");
+	}
+	
 }

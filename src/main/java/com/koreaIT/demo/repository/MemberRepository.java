@@ -28,4 +28,5 @@ public interface MemberRepository {
 	public List<Member> getMembers();
 
 	public void doModifyPassword(int loginedMemberId, String loginPW);
+
 }

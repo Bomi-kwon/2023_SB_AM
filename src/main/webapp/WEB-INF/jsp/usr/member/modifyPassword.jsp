@@ -24,7 +24,7 @@
 								<td><input class="input input-bordered input-warning w-full" type="text" name="loginPWCheck" placeholder="새 비밀번호 확인을 입력해주세요"/></td>
 							</tr>
 							<tr>
-								<td colspan="2"><button class="btn btn-outline btn-warning" onclick="test();">로그인</button></td>
+								<td colspan="2"><button class="btn btn-outline btn-warning" onclick="test();">수정</button></td>
 							</tr>
 						</table>
 				</div>
