@@ -81,6 +81,15 @@
 			<version>1.6.2</version>
 		</dependency>
 		
+		<!-- 셀레니움 웹크롤링을 위한 -->
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-java</artifactId>
+	    </dependency>
+		
+		
+		
+		
 	</dependencies>
 
 	<build>

@@ -19,12 +19,14 @@ import com.koreaIT.demo.service.ReplyService;
 import com.koreaIT.demo.util.Util;
 import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.Board;
-import com.koreaIT.demo.vo.ReactionPoint;
 import com.koreaIT.demo.vo.Reply;
 import com.koreaIT.demo.vo.ResultData;
 import com.koreaIT.demo.vo.Rq;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
@@ -86,6 +88,14 @@ public class UsrArticleController {
 		int pagesCount = (int) Math.ceil(numberofarticles / (double) itemsInAPage);
 		
 		List<Article> articles = articleService.getArticles(boardId, itemsInAPage, page, keyWordType, keyWord);
+		
+		log.trace("trace test");
+		log.debug("debug test");
+		log.info("info test");
+		log.warn("warn test");
+		log.error("error test");
+		
+		System.out.println("안녕하세용");
 		
 		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("page", page);

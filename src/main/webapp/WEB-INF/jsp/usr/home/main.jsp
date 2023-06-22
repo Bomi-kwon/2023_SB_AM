@@ -69,6 +69,8 @@
 			<a href="/usr/home/APITest">APITest</a>
 			<br />
 			<a href="/usr/home/APITest2">APITest2</a>
+			<br />
+			<a href="/usr/selenium/entranceinfo">셀레니움을 사용한 웹크롤링 예시</a>
 		</div>
 	</section>
 	
