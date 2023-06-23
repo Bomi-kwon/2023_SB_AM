@@ -3,6 +3,7 @@ package com.koreaIT.demo.controller;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -39,6 +40,7 @@ public class UsrSeleniumController {
 		options.addArguments("--remote-allow-origins=*");
 		
 		WebDriver driver = new ChromeDriver(options);
+		// driver.manage().window().maximize();
 		
 		//WebDriver을 해당 url로 이동한다.
 		driver.get(url);
@@ -53,12 +55,12 @@ public class UsrSeleniumController {
 
 		driver.switchTo().frame(driver.findElement(By.cssSelector("iframe#cafe_main")));
 		
+		List<WebElement> contents = new ArrayList<>();
 		
-		List<WebElement> contents = driver.findElements(By.cssSelector("#main-area > div:nth-child(4) > table > tbody > tr"));
+		for(int i = 0 ; i < 5 ; i++) {
 		
-		result += "수만휘 BEST 수기 갯수 : " + contents.size() + "<br /><br />";
+			contents = driver.findElements(By.cssSelector("#main-area > div:nth-child(4) > table > tbody > tr"));
 		
-		if(contents.size() > 0) {
 			for(WebElement content : contents) {
 				String title = content.findElement(By.cssSelector("td.td_article > div.board-list > div > a.article")).getText();
 				String date = content.findElement(By.cssSelector("td.td_date")).getText();
@@ -67,12 +69,15 @@ public class UsrSeleniumController {
 				result += "제목 : " + title + "<br />";
 				result += "날짜 : " + date + "<br />";
 				result += "공지 url : " + url + "<br /><br />";
-				
 			}
+		
+			driver.findElement(By.cssSelector("#main-area > div.prev-next > a.on + a")).click();
+					
+			
 		}
 		
 		
-		driver.quit();
+		// driver.quit();
 		
 		
 		return result;
