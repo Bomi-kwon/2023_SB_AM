@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UsrSeleniumController {
 	
-	private String url = "https://admission.snu.ac.kr/undergraduate/notice?sc=y";
+	private String url = "https://cafe.naver.com/suhui";
 	
 	@GetMapping("/usr/selenium/entranceinfo")
-	public String entranceinfo() {
+	public String entranceinfo() throws InterruptedException {
 		String result = "";
 		
 		System.out.println("까꿍");
@@ -32,49 +32,48 @@ public class UsrSeleniumController {
 		
 		ChromeOptions options = new ChromeOptions();
 		
-		options.addArguments("--disable-popup-blocking");   // 팝업 안띄움
-        options.addArguments("headless");   // 브라우저 안띄움
-        options.addArguments("--disable-gpu");  // gpu 비활성화
-        options.addArguments("--blink-settings=imagesEnabled=false");   // 이미지 다운 안받음
+		// options.addArguments("--disable-popup-blocking");   // 팝업 안띄움
+        // options.addArguments("headless");   // 브라우저 안띄움
+        // options.addArguments("--disable-gpu");  // gpu 비활성화
+        // options.addArguments("--blink-settings=imagesEnabled=false");   // 이미지 다운 안받음
 		options.addArguments("--remote-allow-origins=*");
 		
 		WebDriver driver = new ChromeDriver(options);
 		
-		WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		
 		//WebDriver을 해당 url로 이동한다.
 		driver.get(url);
 		
-		webDriverWait.until(
-				ExpectedConditions.presenceOfElementLocated(By.cssSelector("#skip-content > div > div.ly-inner > div.board-list > table > tbody > tr")));
+		Thread.sleep(1000);
 		
-		try {
-			List<WebElement> contents = driver.findElements(By.cssSelector("#skip-content > div > div.ly-inner > div.board-list > table > tbody > tr"));
-			result += "서울대 입학정보 공지글 갯수 : " + contents.size() + "<br /><br />";
+		driver.findElement(By.cssSelector("#menuLink3782")).click();
+		
+		Thread.sleep(1000);
+		
+		// 태그에 접근 후 iframe 태그로 이동합니다.
+
+		driver.switchTo().frame(driver.findElement(By.cssSelector("iframe#cafe_main")));
+		
+		
+		List<WebElement> contents = driver.findElements(By.cssSelector("#main-area > div:nth-child(4) > table > tbody > tr"));
+		
+		result += "수만휘 BEST 수기 갯수 : " + contents.size() + "<br /><br />";
+		
+		if(contents.size() > 0) {
+			for(WebElement content : contents) {
+				String title = content.findElement(By.cssSelector("td.td_article > div.board-list > div > a.article")).getText();
+				String date = content.findElement(By.cssSelector("td.td_date")).getText();
+				String url = content.findElement(By.cssSelector("td.td_article > div.board-list > div > a.article")).getAttribute("href");
 			
-			
-			if(contents.size() > 0) {
-				
-				for(WebElement content : contents) {
-					String title = content.findElement(By.cssSelector("td.col-title > a > span > span")).getText();
-					String date = content.findElement(By.cssSelector("td.col-date")).getText();
-					
-					String url = content.findElement(By.cssSelector("td.col-title > a")).getAttribute("href");
-					
-					result += "제목 : " + title + "<br />";
-					result += "날짜 : " + date + "<br />";
-					result += "공지 url : " + url + "<br /><br />";
-				}
-				
+				result += "제목 : " + title + "<br />";
+				result += "날짜 : " + date + "<br />";
+				result += "공지 url : " + url + "<br /><br />";
 				
 			}
-		} catch (Exception e) {
-			result += "elements 가져오지 못함";
-			
 		}
 		
 		
 		driver.quit();
+		
 		
 		return result;
 	}
