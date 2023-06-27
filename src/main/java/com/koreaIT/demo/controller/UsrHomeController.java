@@ -1,19 +1,8 @@
 package com.koreaIT.demo.controller;
 
-import java.time.Duration;
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.ArticleService;
 import com.koreaIT.demo.service.MemberService;
@@ -58,6 +47,11 @@ public class UsrHomeController {
 	@RequestMapping("/usr/home/popup")
 	public String showPopup() {
 		return "usr/home/popup";
+	}
+	
+	@RequestMapping("/usr/home/voice")
+	public String voice() {
+		return "usr/home/voice";
 	}
 	
 	

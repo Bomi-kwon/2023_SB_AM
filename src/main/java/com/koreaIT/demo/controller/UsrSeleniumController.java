@@ -72,7 +72,6 @@ public class UsrSeleniumController {
 			}
 		
 			driver.findElement(By.cssSelector("#main-area > div.prev-next > a.on + a")).click();
-					
 			
 		}
 		

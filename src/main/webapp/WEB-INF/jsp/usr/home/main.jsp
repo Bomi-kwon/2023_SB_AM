@@ -71,6 +71,8 @@
 			<a href="/usr/home/APITest2">APITest2</a>
 			<br />
 			<a href="/usr/selenium/entranceinfo">셀레니움을 사용한 웹크롤링 예시</a>
+			<br />
+			<a href="/usr/home/voice">음성인식 테스트</a>
 		</div>
 	</section>
 	
