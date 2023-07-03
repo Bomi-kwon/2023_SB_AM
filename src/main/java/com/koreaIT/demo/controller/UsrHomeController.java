@@ -54,5 +54,10 @@ public class UsrHomeController {
 		return "usr/home/voice";
 	}
 	
+	@RequestMapping("/usr/home/typing")
+	public String typing() {
+		return "usr/home/typing";
+	}
+	
 	
 }

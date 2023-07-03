@@ -20,7 +20,26 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/SB_AM?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
     username: root
-    password: 
+    password: root
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 64f752c8cf030c9eb474d73f0a2dba61
+            client-secret: hD9t4joNE6zIFiKrDAjD3V75eSp2DGuG
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            authorization-grant-type: authorization_code
+            client-authentication-method: POST
+            client-name: Kakao
+            scope:
+              - profile_nickname
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
 mybatis:
   type-aliases-package: com.koreaIT.demo.vo
 custom:

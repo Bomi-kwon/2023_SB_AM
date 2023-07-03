@@ -19,6 +19,18 @@
 </script>
  -->
 
+<c:if test="${member != null }">
+	<div>
+		<span>현재 로그인된 멤버 : ${member.name }</span>
+	</div>
+</c:if>
+
+<c:if test="${member == null }">
+	<div>
+		<span>현재 로그인된 멤버가 없습니다.</span>
+	</div>
+</c:if>
+
 	<section class="mt-8 mx-auto text-xl">
 		<div class="container mx-auto px-3">
 			<div class=" mb-2 flex justify-between items-center">

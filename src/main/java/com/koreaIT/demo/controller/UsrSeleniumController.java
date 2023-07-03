@@ -2,7 +2,6 @@ package com.koreaIT.demo.controller;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +22,6 @@ public class UsrSeleniumController {
 	public String entranceinfo() throws InterruptedException {
 		String result = "";
 		
-		System.out.println("까꿍");
-		
 		Path path = Paths.get("C:\\bbomi\\chromedriver\\chromedriver.exe");
 		
 		System.setProperty("webdriver.chrome.driver", path.toString());
@@ -37,7 +32,7 @@ public class UsrSeleniumController {
         // options.addArguments("headless");   // 브라우저 안띄움
         // options.addArguments("--disable-gpu");  // gpu 비활성화
         // options.addArguments("--blink-settings=imagesEnabled=false");   // 이미지 다운 안받음
-		options.addArguments("--remote-allow-origins=*");
+		options.addArguments("--remote-allow-origins=*");	//웹소켓 연결
 		
 		WebDriver driver = new ChromeDriver(options);
 		// driver.manage().window().maximize();
@@ -75,9 +70,7 @@ public class UsrSeleniumController {
 			
 		}
 		
-		
 		// driver.quit();
-		
 		
 		return result;
 	}

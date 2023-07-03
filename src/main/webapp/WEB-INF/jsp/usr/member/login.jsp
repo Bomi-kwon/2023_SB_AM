@@ -39,6 +39,9 @@
 								<td colspan="2"><button class="btn btn-outline btn-warning">로그인</button></td>
 							</tr>
 						</table>
+						<a href="http://localhost:8080/oauth2/authorization/kakao">
+							<img src="/resource/images/kakao_login_small.png" width="200" height="auto" alt="" />
+						</a>
 				</div>
 			</form>
 			

@@ -73,6 +73,8 @@
 			<a href="/usr/selenium/entranceinfo">셀레니움을 사용한 웹크롤링 예시</a>
 			<br />
 			<a href="/usr/home/voice">음성인식 테스트</a>
+			<br />
+			<a href="/usr/home/typing">글자 써지는 효과</a>
 		</div>
 	</section>
 	

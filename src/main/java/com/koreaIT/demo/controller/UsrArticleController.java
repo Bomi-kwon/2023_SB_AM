@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.koreaIT.demo.service.ArticleService;
 import com.koreaIT.demo.service.BoardService;
 import com.koreaIT.demo.service.ReplyService;
+import com.koreaIT.demo.social.PrincipalDetails;
 import com.koreaIT.demo.util.Util;
 import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.Board;
@@ -71,7 +73,14 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "2") int boardId, 
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "title") String keyWordType, 
-			@RequestParam(defaultValue = "") String keyWord) {
+			@RequestParam(defaultValue = "") String keyWord, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		// principalDetails 가 null 이 아니라면 로그인 된 상태!!
+		if(principalDetails != null ) {
+			// 세션에서 로그인 유저 정보를 가져옴
+			model.addAttribute("member",principalDetails.getMember());
+			
+		}
 		
 		if(page <= 0) {
 			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다.", true);
